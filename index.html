@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="lib/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+ <script src="lib/leaflet.js"
+ integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+ crossorigin=""></script>
+    <style>
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    html, body, #map {
+        height: 100%;
+    }
+    #loadingHint {
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%, -50%);
+        color: white; background: #666666; opacity: .8;
+        padding: 10px;
+        z-index: 1000;
+    }
+    .leaflet-layer {
+        filter: grayscale(0.8);
+    }
+    </style>
+</head>
+<body>
+    <div id="map"> </div>
+
+    <div id="loadingHint">Daten werden geladen...</div>
+
+    <script>
+    var tileUrl = 'http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ';
+    var tileAttribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
+
+
+    var map = L.map('map').setView([53.54, 10], 12);
+    L.tileLayer(tileUrl, {
+        attribution: tileAttribution,
+        maxZoom: 18
+    }).addTo(map);
+
+    const fetchJson = (url) => fetch(url).then(resp => resp.json()).catch(e => console.log(`url: ${url}; error: ${e}`));
+
+
+
+    const anzahlToWeight2023 = (anzahl) => {
+        if (anzahl > 90) {
+            return 6;
+        } else if (anzahl > 75) {
+            return 5;
+        } else if (anzahl > 60) {
+            return 4;
+        } else if (anzahl > 45) {
+            return 4;
+        } else if (anzahl > 30) {
+            return 3;
+        } else if (anzahl > 15) {
+            return 2;
+        } else {
+            return 1; // minimalwert in den daten: 8
+        }
+    }
+
+    const anzahlToWeight2022 = (anzahl) => {
+        if (anzahl > 3000) {
+            return 6;
+        } else if (anzahl > 2500) {
+            return 5;
+        } else if (anzahl > 2000) {
+            return 4;
+        } else if (anzahl > 1500) {
+            return 4;
+        } else if (anzahl > 1000) {
+            return 3;
+        } else if (anzahl > 500) {
+            return 3;
+        } else {
+            return 2;
+        }
+    }
+
+    const colorFromSpeed = (speed) => {
+        if (speed < 10) {
+            return "red";
+        } else if (speed < 15) {
+            return "orange";
+        } else if (speed < 20) {
+            return "yellow";
+        } else if (speed < 25) {
+            return "green";
+        } else if (speed < 30) {
+            return "blue";
+        }
+        return "black"; // there should be no records of speed >= 30
+    }
+
+    const style2023 = {
+        style: (feature) => {
+            const anzahl = feature.properties.anzahl;
+            const speed = feature.properties.geschwindigkeit;
+
+            let weight = anzahlToWeight2023(anzahl);
+            let color = colorFromSpeed(speed);
+            let opacity = 1;
+            // let opacity = (speed <15) ? 1 : 0.2;
+
+            return { weight,  color, opacity };
+        }
+    };
+
+    const style2022 = {
+        style: (feature) => {
+            const anzahl = feature.properties.anzahl;
+            const speed = feature.properties.geschwindigkeit;
+
+
+            let weight = anzahlToWeight2022(anzahl);
+            let color = colorFromSpeed(speed);
+            let opacity = (speed < 5) ? 1 : 0.5;
+
+
+            return { weight,  color, opacity };
+        }
+    };
+
+    const fetchLayers = async () => {
+        const dbrad2023 = L.geoJSON(await fetchJson("dbrad2023.json"), style2023);
+        const letzte_woche = L.geoJSON(await fetchJson("dbrad2023_woche.json"), style2023);
+
+        L.control.layers(null, {
+            "2023": L.featureGroup([dbrad2023]).bringToFront().addTo(map),
+            "Letzte Woche": L.featureGroup([letzte_woche]).bringToFront(),
+        }, {collapsed: false}).addTo(map);
+
+        document.getElementById("loadingHint").style.display = "none";
+    }
+    fetchLayers();
+
+</script>
+
+</body>
+</html>
