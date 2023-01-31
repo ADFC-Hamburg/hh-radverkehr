@@ -117,7 +117,7 @@
             opacity: 1
         })});
 
-    const dbrad2022 = fetchLayerWithOutline("data/dbrad_jahr_2022.json",
+    const dbrad2022 = fetchLayerWithOutline("data/dbrad_jahr_2022.json.min",
         {style: (feature) => ({
             color: "black",
             weight: anzahlToWeight2022(feature.properties.anzahl) + 1,
