@@ -49,8 +49,6 @@
 
     const fetchJson = (url) => fetch(url).then(resp => resp.json()).catch(e => console.log(`url: ${url}; error: ${e}`));
 
-
-
     const anzahlToWeight2023 = (anzahl) => {
         if (anzahl > 90) {
             return 6;
@@ -81,64 +79,68 @@
         } else if (anzahl > 1000) {
             return 3;
         } else if (anzahl > 500) {
-            return 3;
-        } else {
             return 2;
+        } else {
+            return 1;
         }
     }
 
     const colorFromSpeed = (speed) => {
         if (speed < 10) {
             return "red";
-        } else if (speed < 15) {
+        } else if (speed < 12) {
+            return "red";
+        } else if (speed < 18) {
             return "orange";
-        } else if (speed < 20) {
+        } else if (speed < 21) {
             return "yellow";
-        } else if (speed < 25) {
-            return "green";
         } else if (speed < 30) {
-            return "blue";
+            return "green";
         }
         return "black"; // there should be no records of speed >= 30
     }
 
-    const style2023 = {
-        style: (feature) => {
-            const anzahl = feature.properties.anzahl;
-            const speed = feature.properties.geschwindigkeit;
-
-            let weight = anzahlToWeight2023(anzahl);
-            let color = colorFromSpeed(speed);
-            let opacity = 1;
-            // let opacity = (speed <15) ? 1 : 0.2;
-
-            return { weight,  color, opacity };
-        }
+    const fetchLayerWithOutline = async (url, optionsOutline, optionsFill) => {
+        const geoJson = await fetchJson(url);
+        return [L.geoJSON(geoJson, optionsOutline), L.geoJSON(geoJson, optionsFill)];
     };
 
-    const style2022 = {
-        style: (feature) => {
-            const anzahl = feature.properties.anzahl;
-            const speed = feature.properties.geschwindigkeit;
+    const dbrad2023 = fetchLayerWithOutline("data/dbrad_jahr_2023.json",
+        {style: (feature) => ({
+            color: "black",
+            weight: anzahlToWeight2023(feature.properties.anzahl) + 1,
+            opacity: feature.properties.anzahl > 45 ? 1 : 0
+        })},
+        {style: (feature) => ({
+            color: colorFromSpeed(feature.properties.geschwindigkeit),
+            weight: anzahlToWeight2023(feature.properties.anzahl),
+            opacity: 1
+        })});
 
-
-            let weight = anzahlToWeight2022(anzahl);
-            let color = colorFromSpeed(speed);
-            let opacity = (speed < 5) ? 1 : 0.5;
-
-
-            return { weight,  color, opacity };
-        }
-    };
+    const dbrad2022 = fetchLayerWithOutline("data/dbrad_jahr_2022.json",
+        {style: (feature) => ({
+            color: "black",
+            weight: anzahlToWeight2022(feature.properties.anzahl) + 1,
+            opacity: feature.properties.anzahl > 2000 ? 1 : 0
+        })},
+        {style: (feature) => ({
+            color: colorFromSpeed(feature.properties.geschwindigkeit),
+            weight: anzahlToWeight2022(feature.properties.anzahl),
+            opacity: feature.properties.anzahl > 100 ? 1 : 0
+        })});
 
     const fetchLayers = async () => {
-        const dbrad2023 = L.geoJSON(await fetchJson("dbrad2023.json"), style2023);
-        const letzte_woche = L.geoJSON(await fetchJson("dbrad2023_woche.json"), style2023);
+        const letzte_woche = L.geoJSON(await fetchJson("data/dbrad_woche_2023-01-31.json"), {style: (feature) => ({
+            color: colorFromSpeed(feature.properties.geschwindigkeit),
+            weight: anzahlToWeight2023(feature.properties.anzahl),
+            opacity: 1
+        })});
 
-        L.control.layers(null, {
-            "2023": L.featureGroup([dbrad2023]).bringToFront().addTo(map),
+        L.control.layers({
+            "2022": L.featureGroup(await dbrad2022).bringToFront(),
+            "2023": L.featureGroup(await dbrad2023).bringToFront().addTo(map),
             "Letzte Woche": L.featureGroup([letzte_woche]).bringToFront(),
-        }, {collapsed: false}).addTo(map);
+        }, null, {collapsed: false}).addTo(map);
 
         document.getElementById("loadingHint").style.display = "none";
     }
