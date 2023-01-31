@@ -9,20 +9,24 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
-    runs-on: ubuntu-latest
+    runs-on: osgeo/gdal:ubuntu-small-latest
     steps:
+      - name: Set current date as env variable
+        run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - uses: actions/checkout@v3
-      - name: Install ogr2ogr
-        run: sudo apt install -y gdal-bin
       - name: Download
-        run: mkdir -p dist/ && wget -O HH_WFS_DB_Rad_Plus.gml "https://geodienste.hamburg.de/HH_WFS_DB_Rad_Plus?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&typename=de.hh.up:aktuelles_jahr,de.hh.up:letzte_woche,de.hh.up:jahr2022"
+        run: wget -O HH_WFS_DB_Rad_Plus.gml "https://geodienste.hamburg.de/HH_WFS_DB_Rad_Plus?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&typename=de.hh.up:aktuelles_jahr,de.hh.up:letzte_woche,de.hh.up:jahr2022"
       - name: Convert 2023
-        run: ogr2ogr -f "GeoJSON" dist/dbrad2023.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml aktuelles_jahr
+        run: ogr2ogr -f "GeoJSON" data/dbrad2023.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml aktuelles_jahr
       - name: Convert Letzte Woche
-        run: ogr2ogr -f "GeoJSON" dist/dbrad2023_woche.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml letzte_woche
+        run: ogr2ogr -f "GeoJSON" data/dbrad2023_woche$TODAY.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml letzte_woche
       - name: Archive GeoJSON
         uses: actions/upload-artifact@v3
         with:
           name: dist-json
           path: |
-            dist/*.json
+            data/*.json
+      - uses: EndBug/add-and-commit@v9
+        with:
+            add: 'data/*.json'
+            message: 'Fetched current data from Geoportal Hamburg'
