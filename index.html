@@ -37,18 +37,35 @@
     <div id="loadingHint">Daten werden geladen...</div>
 
     <script>
+
+    // Karteneinstellungen
     var tileUrl = 'http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ';
     var tileAttribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
 
-
-    var map = L.map('map').setView([53.54, 10], 12);
+    var map = L.map('map').setView([53.54, 10], 13);
     L.tileLayer(tileUrl, {
         attribution: tileAttribution,
         maxZoom: 18
     }).addTo(map);
 
-    const fetchJson = (url) => fetch(url).then(resp => resp.json()).catch(e => console.log(`url: ${url}; error: ${e}`));
+    // Konfigurationen der Daten und Schwellwerte
+    const config = {
+        urls: {
+           data2022: "data/dbrad_jahr_2022.json.min",
+           data2023: "data/dbrad_jahr_2023.json",
+           data_letzte_woche: "data/dbrad_woche_2023-01-31.json"
+        }
+    };
 
+    // Weight = Dicke der Streckendarstellung
+    // 2 Möglichkeiten, die noch nicht einheitlich benutzt werden
+
+    // Entweder automatische Gewichtung der Streckenabschnitte, indem man auf die Anzahl der Fahrten pro Tag im Messzeitraum runterrechnet
+    const anzahlProTagToWeight = (anzahl, tage) => {
+        return anzahl / tage;
+    };
+
+    // Oder für jeden Datensatz händisch die Schwellwerte festlegen:
     const anzahlToWeight2023 = (anzahl) => {
         if (anzahl > 90) {
             return 6;
@@ -63,9 +80,9 @@
         } else if (anzahl > 15) {
             return 2;
         } else {
-            return 1; // minimalwert in den daten: 8
+            return 2; // minimalwert in den daten: 8
         }
-    }
+    };
 
     const anzahlToWeight2022 = (anzahl) => {
         if (anzahl > 3000) {
@@ -83,8 +100,10 @@
         } else {
             return 1;
         }
-    }
+    };
 
+
+    // Farbe je nach gemessener Durchschnittsgeschwindigkeit
     const colorFromSpeed = (speed) => {
         if (speed < 10) {
             return "red";
@@ -98,53 +117,91 @@
             return "green";
         }
         return "black"; // there should be no records of speed >= 30
-    }
+    };
 
-    const fetchLayerWithOutline = async (url, optionsOutline, optionsFill) => {
-        const geoJson = await fetchJson(url);
+    const fetchJson = (url) => fetch(url).then(resp => resp.json()).catch(e => console.log(`url: ${url}; error: ${e}`));
+
+    // Hervorhebung von Streckenabschnitten, indem ein zweiter Layer darunter eingeblendet wird
+    const getLayerWithOutline = (geoJson, optionsOutline, optionsFill) => {
         return [L.geoJSON(geoJson, optionsOutline), L.geoJSON(geoJson, optionsFill)];
     };
 
-    const dbrad2023 = fetchLayerWithOutline("data/dbrad_jahr_2023.json",
-        {style: (feature) => ({
-            color: "black",
-            weight: anzahlToWeight2023(feature.properties.anzahl) + 1,
-            opacity: feature.properties.anzahl > 45 ? 1 : 0
-        })},
-        {style: (feature) => ({
-            color: colorFromSpeed(feature.properties.geschwindigkeit),
-            weight: anzahlToWeight2023(feature.properties.anzahl),
-            opacity: 1
-        })});
 
-    const dbrad2022 = fetchLayerWithOutline("data/dbrad_jahr_2022.json.min",
-        {style: (feature) => ({
-            color: "black",
-            weight: anzahlToWeight2022(feature.properties.anzahl) + 1,
-            opacity: feature.properties.anzahl > 2000 ? 1 : 0
-        })},
-        {style: (feature) => ({
-            color: colorFromSpeed(feature.properties.geschwindigkeit),
-            weight: anzahlToWeight2022(feature.properties.anzahl),
-            opacity: feature.properties.anzahl > 100 ? 1 : 0
-        })});
+    // Hier ist der eigentliche Ablauf der Seite als asynchrone Funktion, um Oberfläche nicht zu blockieren
+    const start = async () => {
+        // erstmal alle Daten holen - kann man auch parallelisieren => spätere Optimierung, etwas weniger warten am Anfang
+        const data2022 = await fetchJson(config.urls.data2022);
+        const data2023 = await fetchJson(config.urls.data2023);
+        const data_letzte_woche = await fetchJson(config.urls.data_letzte_woche);
 
-    const fetchLayers = async () => {
-        const letzte_woche = L.geoJSON(await fetchJson("data/dbrad_woche_2023-01-31.json"), {style: (feature) => ({
-            color: colorFromSpeed(feature.properties.geschwindigkeit),
-            weight: anzahlToWeight2023(feature.properties.anzahl),
-            opacity: 1
-        })});
+
+        const geschwindigkeitenFuerAbschnitt = (feature) => {
+            // hole Daten basierend auf Koordinaten für aktuellen Abschnitt
+            const featureFrom2022 = data2022.features.filter(f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(feature.geometry.coordinates))[0];
+            const featureFrom2023 = data2023.features.filter(f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(feature.geometry.coordinates))[0];
+            const featureFromLetzteWoche = data_letzte_woche.features.filter(f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(feature.geometry.coordinates))[0];
+
+            const v2022 = featureFrom2022?.properties.geschwindigkeit ?? "-";
+            const v2023 = featureFrom2023?.properties.geschwindigkeit ?? "-";
+            const vLetzteWoche = featureFromLetzteWoche?.properties.geschwindigkeit ?? "-";
+
+            return "2022: " + v2022 + "; 2023: " + v2023 + "; Letzte Woche: " + vLetzteWoche;
+        };
+
+
+        const dbrad2023 = getLayerWithOutline(data2023, {style: (feature) => ({
+                color: "black",
+                weight: anzahlToWeight2023(feature.properties.anzahl, 30) + 1,
+                opacity: feature.properties.anzahl > 45 ? 1 : 0
+            })},
+            {style: (feature) => ({
+                color: colorFromSpeed(feature.properties.geschwindigkeit),
+                weight: anzahlToWeight2023(feature.properties.anzahl, 30),
+                opacity: 1
+            }), onEachFeature: (feature, layer) => {
+                layer.bindPopup("Lade.... ").on("popupopen", (event) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
+                    event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
+                });
+            }
+        });
+
+
+        const dbrad2022 = getLayerWithOutline(data2022,
+            {style: (feature) => ({
+                color: "black",
+                weight: anzahlToWeight2022(feature.properties.anzahl, 365) + 1,
+                opacity: feature.properties.anzahl > 2000 ? 1 : 0
+            })},
+            {style: (feature) => ({
+                color: colorFromSpeed(feature.properties.geschwindigkeit),
+                weight: anzahlToWeight2022(feature.properties.anzahl, 365),
+                opacity: feature.properties.anzahl > 100 ? 1 : 0
+            }), onEachFeature: (feature, layer) => {
+                layer.bindPopup("Lade.... ").on("popupopen", (event) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
+                    event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
+                });
+            }});
+
+        const letzte_woche = L.geoJSON(data_letzte_woche, {style: (feature) => ({
+                color: colorFromSpeed(feature.properties.geschwindigkeit),
+                weight: anzahlProTagToWeight(feature.properties.anzahl, 7),
+                opacity: 1
+            }), onEachFeature: (feature, layer) => {
+                layer.bindPopup("Lade.... ").on("popupopen", (event) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
+                    event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
+                });
+            }});
 
         L.control.layers({
-            "2022": L.featureGroup(await dbrad2022).bringToFront(),
-            "2023": L.featureGroup(await dbrad2023).bringToFront().addTo(map),
+            "2022": L.featureGroup(dbrad2022).bringToFront(),
+            "2023": L.featureGroup(dbrad2023).bringToFront().addTo(map),
             "Letzte Woche": L.featureGroup([letzte_woche]).bringToFront(),
         }, null, {collapsed: false}).addTo(map);
 
         document.getElementById("loadingHint").style.display = "none";
-    }
-    fetchLayers();
+    };
+
+    start();
 
 </script>
 
