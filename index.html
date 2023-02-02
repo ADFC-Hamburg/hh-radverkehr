@@ -140,9 +140,9 @@
 
         const geschwindigkeitenFuerAbschnitt = (feature) => {
             // hole Daten basierend auf Koordinaten für aktuellen Abschnitt
-            const featureFrom2022 = data2022.features.filter(filterFeatureNachKoordinaten)[0];
-            const featureFrom2023 = data2023.features.filter(filterFeatureNachKoordinaten)[0];
-            const featureFromLetzteWoche = data_letzte_woche.features.filter(filterFeatureNachKoordinaten)[0];
+            const featureFrom2022 = data2022.features.filter(filterFeatureNachKoordinaten(feature.geometry.coordinates))[0];
+            const featureFrom2023 = data2023.features.filter(filterFeatureNachKoordinaten(feature.geometry.coordinates))[0];
+            const featureFromLetzteWoche = data_letzte_woche.features.filter(filterFeatureNachKoordinaten(feature.geometry.coordinates))[0];
 
             const v2022 = featureFrom2022?.properties.geschwindigkeit ?? "-";
             const v2023 = featureFrom2023?.properties.geschwindigkeit ?? "-";
