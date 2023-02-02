@@ -126,6 +126,10 @@
         return [L.geoJSON(geoJson, optionsOutline), L.geoJSON(geoJson, optionsFill)];
     };
 
+    const filterFeatureNachKoordinaten = (koordinaten) => {
+        return f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(koordinaten)
+    }
+
 
     // Hier ist der eigentliche Ablauf der Seite als asynchrone Funktion, um Oberfläche nicht zu blockieren
     const start = async () => {
@@ -134,18 +138,17 @@
         const data2023 = await fetchJson(config.urls.data2023);
         const data_letzte_woche = await fetchJson(config.urls.data_letzte_woche);
 
-
         const geschwindigkeitenFuerAbschnitt = (feature) => {
             // hole Daten basierend auf Koordinaten für aktuellen Abschnitt
-            const featureFrom2022 = data2022.features.filter(f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(feature.geometry.coordinates))[0];
-            const featureFrom2023 = data2023.features.filter(f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(feature.geometry.coordinates))[0];
-            const featureFromLetzteWoche = data_letzte_woche.features.filter(f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(feature.geometry.coordinates))[0];
+            const featureFrom2022 = data2022.features.filter(filterFeatureNachKoordinaten)[0];
+            const featureFrom2023 = data2023.features.filter(filterFeatureNachKoordinaten)[0];
+            const featureFromLetzteWoche = data_letzte_woche.features.filter(filterFeatureNachKoordinaten)[0];
 
             const v2022 = featureFrom2022?.properties.geschwindigkeit ?? "-";
             const v2023 = featureFrom2023?.properties.geschwindigkeit ?? "-";
             const vLetzteWoche = featureFromLetzteWoche?.properties.geschwindigkeit ?? "-";
 
-            return "2022: " + v2022 + "; 2023: " + v2023 + "; Letzte Woche: " + vLetzteWoche;
+            return "Gemessene Durchschnittsgeschwindigkeiten für diesen Abschnitt in km/h:<br /><b>2022:</b> " + v2022 + "<br /><b>2023 bisher:</b> " + v2023 + "<br /><b>Letzte Woche:</b> " + vLetzteWoche;
         };
 
 
