@@ -53,7 +53,25 @@
         urls: {
            data2022: "data/dbrad_jahr_2022.json.min",
            data2023: "data/dbrad_jahr_2023.json",
-           data_letzte_woche: "data/dbrad_woche_2023-01-31.json"
+           data_letzte_woche: "data/dbrad_woche_2023-01-31.json",
+           velorouten: [
+            "data/velorouten/veloroute1.json",
+            "data/velorouten/veloroute2.json",
+            "data/velorouten/veloroute3.json",
+            "data/velorouten/veloroute4.json",
+            "data/velorouten/veloroute5.json",
+            "data/velorouten/veloroute6.json",
+            "data/velorouten/veloroute7.json",
+            "data/velorouten/veloroute8.json",
+            "data/velorouten/veloroute9.json",
+            "data/velorouten/veloroute10.json",
+            "data/velorouten/veloroute11.json",
+            "data/velorouten/veloroute12.json",
+            "data/velorouten/veloroute13.json",
+            "data/velorouten/veloroute14.json",
+            "data/velorouten/veloroute-verb.json",
+           ]
+           
         }
     };
 
@@ -128,7 +146,38 @@
 
     const filterFeatureNachKoordinaten = (koordinaten) => {
         return f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(koordinaten)
-    }
+    };
+
+    const zeichneLayer = (daten, getFarbe, getDicke, overlayOptionen) => {
+        if (overlayOptionen.active) {
+            return [   L.geoJSON(daten, {style: (feature) => ({
+                    color: "black",
+                    weight: getDicke() + 1,
+                    opacity: overlayOptionen.dicke(feature)
+                })}),
+                L.geoJSON(daten, {style: (feature) => ({
+                    color: getFarbe(),
+                    weight: getDicke(),
+                    opacity: 1
+                }), onEachFeature: (feature, layer) => {
+                    layer.bindPopup("Lade.... ").on("popupopen", (event) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
+                        event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
+                    });
+                }
+            })]
+        } else {
+            return [ L.geoJSON(daten, {style: (feature) => ({
+                color: getFarbe(),
+                weight: getDicke(),
+                opacity: 1
+            }), onEachFeature: (feature, layer) => {
+                layer.bindPopup("Lade.... ").on("popupopen", (event) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
+                    event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
+                });
+            }
+        })]
+        }
+    };
 
 
     // Hier ist der eigentliche Ablauf der Seite als asynchrone Funktion, um Oberfläche nicht zu blockieren
@@ -195,13 +244,31 @@
                 });
             }});
 
+        
+        // wird später nachgeladen
+        const velogruppe = L.featureGroup([]);
+
         L.control.layers({
-            "2022": L.featureGroup(dbrad2022).bringToFront(),
-            "2023": L.featureGroup(dbrad2023).bringToFront().addTo(map),
-            "Letzte Woche": L.featureGroup([letzte_woche]).bringToFront(),
-        }, null, {collapsed: false}).addTo(map);
+            "2022": L.featureGroup(dbrad2022),
+            "2023": L.featureGroup(dbrad2023).addTo(map),
+            "Letzte Woche": L.featureGroup([letzte_woche]),
+        }, {
+            "Velorouten": velogruppe.bringToBack()
+        }, {collapsed: false}).addTo(map);
 
         document.getElementById("loadingHint").style.display = "none";
+
+
+        // Nachladen der Velorouten
+        const velorouten_data = await Promise.all(config.urls.velorouten.map(url => fetchJson(url)));
+        const velorouten = velorouten_data.map(veloroute => {
+            return L.geoJSON(veloroute, {style: (feature) => ({
+                color: "blue",
+                weight: 8,
+                opacity: 0.3
+            })});
+        });
+        velorouten.forEach(veloroute => velogruppe.addLayer(veloroute));        
     };
 
     start();
