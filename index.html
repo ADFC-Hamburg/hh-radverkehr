@@ -197,7 +197,13 @@
             const v2023 = featureFrom2023?.properties.geschwindigkeit ?? "-";
             const vLetzteWoche = featureFromLetzteWoche?.properties.geschwindigkeit ?? "-";
 
-            return "Gemessene Durchschnittsgeschwindigkeiten für diesen Abschnitt in km/h:<br /><b>2022:</b> " + v2022 + "<br /><b>2023 bisher:</b> " + v2023 + "<br /><b>Letzte Woche:</b> " + vLetzteWoche;
+            return `Gemessene Durchschnittsgeschwindigkeiten für diesen Abschnitt in km/h:<br />
+            <b>2022:</b> ${v2022} 
+                (basierend auf ${featureFrom2022?.properties.anzahl ?? "-"} Fahrten)<br />
+            <b>2023 bisher:</b> ${v2023}
+                (basierend auf ${featureFrom2023?.properties.anzahl ?? "-"} Fahrten)<br />
+            <b>Letzte Woche:</b> ${vLetzteWoche}
+                (basierend auf ${featureFromLetzteWoche?.properties.anzahl ?? "-"} Fahrten)`;
         };
 
 
