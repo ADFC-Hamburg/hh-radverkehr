@@ -22,6 +22,8 @@ jobs:
         run: ogr2ogr -f "GeoJSON" data/dbrad_jahr_2023.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml aktuelles_jahr
       - name: Convert Letzte Woche
         run: ogr2ogr -f "GeoJSON" data/dbrad_woche_$TODAY.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml letzte_woche
+      - name: Create/Refresh Symlink
+        run: ln -fs dbrad_woche_$TODAY.json data/dbrad_letzte_woche.json
       - name: Archive GeoJSON
         uses: actions/upload-artifact@v3
         with:
