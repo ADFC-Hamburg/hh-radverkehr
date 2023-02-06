@@ -37,11 +37,17 @@
 
     // Karteneinstellungen
     var tileUrl = 'http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ';
-    var tileAttribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
+    var attribution = `
+        Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a><br/>
+        <b>Radverkehrsmengen (DB Rad+):</b> 
+            <a href="https://metaver.de/trefferanzeige?docuuid=0CFF2923-AAEC-42FE-8DE8-A2C56A3EA1CF">Behörde für Verkehr und Mobilitätswende (BVM)</a> (Lizenz: <a href="https://www.govdata.de/dl-de/by-2-0" target="blank">dl-de/by-2-0</a>)<br/>
+        <b>Velorouten:</b>
+            <a href="https://metaver.de/trefferanzeige?docuuid=8254E244-7DD3-401D-AA15-4CDE78D4E91F">Behörde für Verkehr und Mobilitätswende (BVM)</a> (Lizenz: <a href="https://www.govdata.de/dl-de/by-2-0" target="blank">dl-de/by-2-0</a>)
+        `;
 
     var map = L.map('map').setView([53.54, 10], 13);
     L.tileLayer(tileUrl, {
-        attribution: tileAttribution,
+        attribution: attribution,
         maxZoom: 18
     }).addTo(map);
 
