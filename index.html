@@ -258,9 +258,9 @@
         const velogruppe = L.featureGroup([]);
 
         L.control.layers({
-            "2022": L.featureGroup(dbrad2022),
-            "2023": L.featureGroup(dbrad2023).addTo(map),
-            "Letzte Woche": L.featureGroup([letzte_woche]),
+            "Radverkehrsdaten 2022": L.featureGroup(dbrad2022),
+            "Radverkehrsdaten 2023": L.featureGroup(dbrad2023).addTo(map),
+            "Radverkehrsdaten Letzte Woche": L.featureGroup([letzte_woche]),
         }, {
             "Velorouten": velogruppe.bringToBack()
         }, {collapsed: false}).addTo(map);
