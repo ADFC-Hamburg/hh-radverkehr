@@ -26,23 +26,72 @@
     .leaflet-layer {
         filter: grayscale(0.8);
     }
+    #explanation {
+        max-width: 200px;
+        position: absolute;
+        right: 20px;
+        bottom: 100px;
+        background: #fff; opacity: .8;
+        padding: 10px;
+        z-index: 1000;
+        font-family: sans-serif;
+    }
+    #explanation p {
+        font-size: 10pt;
+    }
+
+    #legende div {
+        color: #000;
+        font-size: 10pt;
+        font-weight: bold;
+        display: inline-block;
+        padding: 2px;
+    }
+    #legende .v1 {
+        background-color: red;
+    }
+    #legende .v2 {
+        background-color: orange;
+    }
+    #legende .v3 {
+        background-color: yellow;
+    }
+    #legende .v4 {
+        background-color: green;
+    }
+    
     </style>
 </head>
 <body>
     <div id="map"> </div>
 
     <div id="loadingHint">Daten werden geladen...</div>
+    <div id="explanation">
+        <h3>Radverkehrsdaten Hamburg</h3>
+        <section>
+            <p>Durchschnittsgeschwindigkeit in km/h</p>
+            <div id="legende">
+                <div class="v1">&lt;12</div><div class="v2">&lt;18</div><div class="v3">&lt;21</div><div class="v4">&gt;21</div>                
+            </div>
+        </section>
+
+    </div>
 
     <script>
 
     // Karteneinstellungen
     var tileUrl = 'http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ';
     var attribution = `
-        Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a><br/>
+        Map data &copy; <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors,
+            <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a><br/>
         <b>Radverkehrsmengen (DB Rad+):</b> 
-            <a href="https://metaver.de/trefferanzeige?docuuid=0CFF2923-AAEC-42FE-8DE8-A2C56A3EA1CF">Behörde für Verkehr und Mobilitätswende (BVM)</a> (Lizenz: <a href="https://www.govdata.de/dl-de/by-2-0" target="blank">dl-de/by-2-0</a>)<br/>
+            <a href="https://metaver.de/trefferanzeige?docuuid=0CFF2923-AAEC-42FE-8DE8-A2C56A3EA1CF" target="_blank">Behörde für Verkehr und Mobilitätswende (BVM)</a>
+            (Lizenz: <a href="https://www.govdata.de/dl-de/by-2-0" target="blank">dl-de/by-2-0</a>)<br/>
         <b>Velorouten:</b>
-            <a href="https://metaver.de/trefferanzeige?docuuid=8254E244-7DD3-401D-AA15-4CDE78D4E91F">Behörde für Verkehr und Mobilitätswende (BVM)</a> (Lizenz: <a href="https://www.govdata.de/dl-de/by-2-0" target="blank">dl-de/by-2-0</a>)
+            <a href="https://metaver.de/trefferanzeige?docuuid=8254E244-7DD3-401D-AA15-4CDE78D4E91F" target="_blank">Behörde für Verkehr und Mobilitätswende (BVM)</a>
+            (Lizenz: <a href="https://www.govdata.de/dl-de/by-2-0" target="blank">dl-de/by-2-0</a>)<br />
+        <b>Impressum:</b>
+            <a href="https://hamburg.adfc.de/impressum/" target="_blank">ADFC Hamburg</a>
         `;
 
     var map = L.map('map').setView([53.54, 10], 13);
