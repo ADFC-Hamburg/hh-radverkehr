@@ -80,10 +80,10 @@
     <script>
 
     // Karteneinstellungen
-    var tileUrl = 'http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ';
+    var tileUrl = '//a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ';
     var attribution = `
-        Map data &copy; <a href="http://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors,
-            <a href="http://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a><br/>
+        Map data &copy; <a href="https://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors,
+            <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a><br/>
         <b>Radverkehrsmengen (DB Rad+):</b> 
             <a href="https://metaver.de/trefferanzeige?docuuid=0CFF2923-AAEC-42FE-8DE8-A2C56A3EA1CF" target="_blank">Behörde für Verkehr und Mobilitätswende (BVM)</a>
             (Lizenz: <a href="https://www.govdata.de/dl-de/by-2-0" target="blank">dl-de/by-2-0</a>)<br/>
@@ -94,7 +94,9 @@
             <a href="https://hamburg.adfc.de/impressum/" target="_blank">Impressum</a> | <a href="https://hamburg.adfc.de/datenschutz" target="_blank">Datenschutz</a><br />
         `;
 
-    var map = L.map('map').setView([53.54, 10], 13);
+    var map = L.map('map', {
+        renderer: L.canvas()
+    }).setView([53.54, 10], 13);
     L.tileLayer(tileUrl, {
         attribution: attribution,
         maxZoom: 18
@@ -199,38 +201,6 @@
     const filterFeatureNachKoordinaten = (koordinaten) => {
         return f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(koordinaten)
     };
-
-    const zeichneLayer = (daten, getFarbe, getDicke, overlayOptionen) => {
-        if (overlayOptionen.active) {
-            return [   L.geoJSON(daten, {style: (feature) => ({
-                    color: "black",
-                    weight: getDicke() + 1,
-                    opacity: overlayOptionen.dicke(feature)
-                })}),
-                L.geoJSON(daten, {style: (feature) => ({
-                    color: getFarbe(),
-                    weight: getDicke(),
-                    opacity: 1
-                }), onEachFeature: (feature, layer) => {
-                    layer.bindPopup("Lade.... ").on("popupopen", (event) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
-                        event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
-                    });
-                }
-            })]
-        } else {
-            return [ L.geoJSON(daten, {style: (feature) => ({
-                color: getFarbe(),
-                weight: getDicke(),
-                opacity: 1
-            }), onEachFeature: (feature, layer) => {
-                layer.bindPopup("Lade.... ").on("popupopen", (event) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
-                    event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
-                });
-            }
-        })]
-        }
-    };
-
 
     // Hier ist der eigentliche Ablauf der Seite als asynchrone Funktion, um Oberfläche nicht zu blockieren
     const start = async () => {
