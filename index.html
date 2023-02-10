@@ -161,7 +161,7 @@
         return f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(koordinaten)
     };
 
-    const getMaxGeschwindigkeit = (features) => {
+    const getMaxAnzahl = (features) => {
         return features.sort((feature1, feature2) => {
             return feature2.properties.anzahl - feature1.properties.anzahl;
         })[0].properties.anzahl;
@@ -197,57 +197,27 @@
             return (event) => event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
         };
 
-        const max2022 = getMaxGeschwindigkeit(data2022.features);
-        const max2023 = getMaxGeschwindigkeit(data2023.features);
-        const max_letzte_woche = getMaxGeschwindigkeit(data_letzte_woche.features);
+        const renderGeoDaten = (geoData, outlineAbAnzahl) => {
+            const maxAnzahl = getMaxAnzahl(geoData.features);
 
-        const dbrad2023 = getLayerWithOutline(data2023, {style: (feature) => ({
+            const outlineOptions = {style: (feature) => ({
                 color: "black",
-                weight: anzahlGewichtetToWeight(feature.properties.anzahl, max2023) + 1,
-                opacity: feature.properties.anzahl > 45 ? 1 : 0
-            })},
-            {style: (feature) => ({
-                color: colorFromSpeed(feature.properties.geschwindigkeit),
-                weight: anzahlGewichtetToWeight(feature.properties.anzahl, max2023),
-                opacity: 1
-            }), onEachFeature: (feature, layer) => {
-                layer.bindPopup("Lade.... ").on("popupopen", initPopup(feature));
-            }
-        });
+                weight: anzahlGewichtetToWeight(feature.properties.anzahl, maxAnzahl) + 1,
+                opacity: feature.properties.anzahl > outlineAbAnzahl ? 1 : 0
+            })};
+            const fillOptions = {style: (feature) => ({
+                    color: colorFromSpeed(feature.properties.geschwindigkeit),
+                    weight: anzahlGewichtetToWeight(feature.properties.anzahl, maxAnzahl),
+                    opacity: 1
+                }), onEachFeature: (feature, layer) => {
+                    layer.bindPopup("Lade.... ").on("popupopen", initPopup(feature));
+            }};
 
-        const filterGeoJsonNachAnzahl = (data, mindestAnzahl) => {
-            return { type: data.type, name: data.name, features: data.features.filter((feature) => {
-                return feature.properties.anzahl >= mindestAnzahl;
-            })}
-        }
-
-        const dbrad2022 = getLayerWithOutline(filterGeoJsonNachAnzahl(data2022, 70),
-            {style: (feature) => ({
-                color: "black",
-                weight: anzahlGewichtetToWeight(feature.properties.anzahl, max2022) + 1,
-                opacity: feature.properties.anzahl > 2000 ? 1 : 0
-            })},
-            {style: (feature) => ({
-                color: colorFromSpeed(feature.properties.geschwindigkeit),
-                weight: anzahlGewichtetToWeight(feature.properties.anzahl, max2022),
-                opacity: 1
-            }), onEachFeature: (feature, layer) => {
-                layer.bindPopup("Lade.... ").on("popupopen", initPopup(feature));
-            }});
-
-        const dbrad_letzte_woche = getLayerWithOutline(data_letzte_woche,
-            {style: (feature) => ({
-                color: "black",
-                weight: anzahlGewichtetToWeight(feature.properties.anzahl, max_letzte_woche) + 1,
-                opacity: feature.properties.anzahl > 20 ? 1 : 0
-            })},
-            {style: (feature) => ({
-                color: colorFromSpeed(feature.properties.geschwindigkeit),
-                weight: anzahlGewichtetToWeight(feature.properties.anzahl, max_letzte_woche),
-                opacity: 1
-            }), onEachFeature: (feature, layer) => {
-                layer.bindPopup("Lade.... ").on("popupopen", initPopup(feature));
-            }});
+            return getLayerWithOutline(data2023, outlineOptions, fillOptions);
+        };
+        const dbrad2023 = renderGeoDaten(dbrad2023, 45);
+        const dbrad2022 = renderGeoDaten(filterGeoJsonNachAnzahl(data2022, 70), 2000);
+        const dbrad_letzte_woche = renderGeoDaten(data_letzte_woche, 20);
         
         // wird später nachgeladen
         const velogruppe = L.featureGroup([]);
