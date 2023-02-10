@@ -74,11 +74,9 @@
                 <div class="v1">&lt;12</div><div class="v2">&lt;18</div><div class="v3">&lt;21</div><div class="v4">&gt;21</div>                
             </div>
         </section>
-
     </div>
 
     <script>
-
     // Karteneinstellungen
     var tileUrl = '//a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ';
     var attribution = `
@@ -217,7 +215,13 @@
             }
         });
 
-        const dbrad2022 = getLayerWithOutline(data2022,
+        const filterGeoJsonNachAnzahl = (data, mindestAnzahl) => {
+            return { type: data.type, name: data.name, features: data.features.filter((feature) => {
+                return feature.properties.anzahl >= mindestAnzahl;
+            })}
+        }
+
+        const dbrad2022 = getLayerWithOutline(filterGeoJsonNachAnzahl(data2022, 70),
             {style: (feature) => ({
                 color: "black",
                 weight: anzahlGewichtetToWeight(feature.properties.anzahl, max2022) + 1,
@@ -226,7 +230,7 @@
             {style: (feature) => ({
                 color: colorFromSpeed(feature.properties.geschwindigkeit),
                 weight: anzahlGewichtetToWeight(feature.properties.anzahl, max2022),
-                opacity: feature.properties.anzahl > 100 ? 1 : 0
+                opacity: 1
             }), onEachFeature: (feature, layer) => {
                 layer.bindPopup("Lade.... ").on("popupopen", initPopup(feature));
             }});
