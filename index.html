@@ -125,55 +125,16 @@
             "data/velorouten/veloroute14.json",
             "data/velorouten/veloroute-verb.json",
            ]
-           
         }
     };
 
-    // Weight = Dicke der Streckendarstellung
-    // 2 Möglichkeiten, die noch nicht einheitlich benutzt werden
-
-    // Entweder automatische Gewichtung der Streckenabschnitte, indem man auf die Anzahl der Fahrten pro Tag im Messzeitraum runterrechnet
-    const anzahlProTagToWeight = (anzahl, tage) => {
-        return anzahl / tage;
+    // automatische Gewichtung der Streckenabschnitte, indem man auf die Anzahl der Fahrten pro Tag im Messzeitraum runterrechnet
+    const anzahlGewichtetToWeight = (anzahl, maxAnzahl) => {
+        const minAnzahl = 8;
+        const normiert = (anzahl - minAnzahl) / (maxAnzahl - minAnzahl); 
+        const weight = 2 + (5 * normiert); // Zahl zwischen 2 bis 7
+        return weight;
     };
-
-    // Oder für jeden Datensatz händisch die Schwellwerte festlegen:
-    const anzahlToWeight2023 = (anzahl) => {
-        if (anzahl > 90) {
-            return 6;
-        } else if (anzahl > 75) {
-            return 5;
-        } else if (anzahl > 60) {
-            return 4;
-        } else if (anzahl > 45) {
-            return 4;
-        } else if (anzahl > 30) {
-            return 3;
-        } else if (anzahl > 15) {
-            return 2;
-        } else {
-            return 2; // minimalwert in den daten: 8
-        }
-    };
-
-    const anzahlToWeight2022 = (anzahl) => {
-        if (anzahl > 3000) {
-            return 6;
-        } else if (anzahl > 2500) {
-            return 5;
-        } else if (anzahl > 2000) {
-            return 4;
-        } else if (anzahl > 1500) {
-            return 4;
-        } else if (anzahl > 1000) {
-            return 3;
-        } else if (anzahl > 500) {
-            return 2;
-        } else {
-            return 1;
-        }
-    };
-
 
     // Farbe je nach gemessener Durchschnittsgeschwindigkeit
     const colorFromSpeed = (speed) => {
@@ -202,6 +163,12 @@
         return f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(koordinaten)
     };
 
+    const getMaxGeschwindigkeit = (features) => {
+        return features.sort((feature1, feature2) => {
+            return feature2.properties.anzahl - feature1.properties.anzahl;
+        })[0].properties.anzahl;
+    }
+
     // Hier ist der eigentliche Ablauf der Seite als asynchrone Funktion, um Oberfläche nicht zu blockieren
     const start = async () => {
         // erstmal alle Daten holen - kann man auch parallelisieren => spätere Optimierung, etwas weniger warten am Anfang
@@ -228,58 +195,63 @@
                 (basierend auf ${featureFromLetzteWoche?.properties.anzahl ?? "-"} Fahrten)`;
         };
 
+        const initPopup = (feature) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
+            return (event) => event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
+        };
+
+        const max2022 = getMaxGeschwindigkeit(data2022.features);
+        const max2023 = getMaxGeschwindigkeit(data2023.features);
+        const max_letzte_woche = getMaxGeschwindigkeit(data_letzte_woche.features);
 
         const dbrad2023 = getLayerWithOutline(data2023, {style: (feature) => ({
                 color: "black",
-                weight: anzahlToWeight2023(feature.properties.anzahl, 30) + 1,
+                weight: anzahlGewichtetToWeight(feature.properties.anzahl, max2023) + 1,
                 opacity: feature.properties.anzahl > 45 ? 1 : 0
             })},
             {style: (feature) => ({
                 color: colorFromSpeed(feature.properties.geschwindigkeit),
-                weight: anzahlToWeight2023(feature.properties.anzahl, 30),
+                weight: anzahlGewichtetToWeight(feature.properties.anzahl, max2023),
                 opacity: 1
             }), onEachFeature: (feature, layer) => {
-                layer.bindPopup("Lade.... ").on("popupopen", (event) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
-                    event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
-                });
+                layer.bindPopup("Lade.... ").on("popupopen", initPopup(feature));
             }
         });
-
 
         const dbrad2022 = getLayerWithOutline(data2022,
             {style: (feature) => ({
                 color: "black",
-                weight: anzahlToWeight2022(feature.properties.anzahl, 365) + 1,
+                weight: anzahlGewichtetToWeight(feature.properties.anzahl, max2022) + 1,
                 opacity: feature.properties.anzahl > 2000 ? 1 : 0
             })},
             {style: (feature) => ({
                 color: colorFromSpeed(feature.properties.geschwindigkeit),
-                weight: anzahlToWeight2022(feature.properties.anzahl, 365),
+                weight: anzahlGewichtetToWeight(feature.properties.anzahl, max2022),
                 opacity: feature.properties.anzahl > 100 ? 1 : 0
             }), onEachFeature: (feature, layer) => {
-                layer.bindPopup("Lade.... ").on("popupopen", (event) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
-                    event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
-                });
+                layer.bindPopup("Lade.... ").on("popupopen", initPopup(feature));
             }});
 
-        const letzte_woche = L.geoJSON(data_letzte_woche, {style: (feature) => ({
+        const dbrad_letzte_woche = getLayerWithOutline(data_letzte_woche,
+            {style: (feature) => ({
+                color: "black",
+                weight: anzahlGewichtetToWeight(feature.properties.anzahl, max_letzte_woche) + 1,
+                opacity: feature.properties.anzahl > 20 ? 1 : 0
+            })},
+            {style: (feature) => ({
                 color: colorFromSpeed(feature.properties.geschwindigkeit),
-                weight: anzahlProTagToWeight(feature.properties.anzahl, 7),
+                weight: anzahlGewichtetToWeight(feature.properties.anzahl, max_letzte_woche),
                 opacity: 1
             }), onEachFeature: (feature, layer) => {
-                layer.bindPopup("Lade.... ").on("popupopen", (event) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
-                    event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
-                });
+                layer.bindPopup("Lade.... ").on("popupopen", initPopup(feature));
             }});
-
         
         // wird später nachgeladen
         const velogruppe = L.featureGroup([]);
 
         L.control.layers({
             "Radverkehrsdaten 2022": L.featureGroup(dbrad2022),
-            "Radverkehrsdaten 2023": L.featureGroup(dbrad2023).addTo(map),
-            "Radverkehrsdaten Letzte Woche": L.featureGroup([letzte_woche]),
+            "Radverkehrsdaten 2023": L.featureGroup(dbrad2023),
+            "Radverkehrsdaten Letzte Woche": L.featureGroup(dbrad_letzte_woche).addTo(map),
         }, {
             "Velorouten": velogruppe.bringToBack()
         }, {collapsed: false}).addTo(map);
