@@ -177,10 +177,13 @@
         }
 
         async getFeaturesFuerKoordinaten(koordinaten) {
+            const kw = await this.getKalenderWochen();
             return [
                 {name: '2022', data: await this.getDataFor2022()},
-                {name: '2022', data: await this.getDataFor2023()},
-                {name: '2022', data: await this.getDataForLetzte7Tage()}
+                {name: '2023 bisher', data: await this.getDataFor2023()},
+                {name: '2023 KW4', data: kw['KW4']},
+                {name: '2023 KW5', data: kw['KW5']},
+                {name: 'Letzte 7 Tage', data: await this.getDataForLetzte7Tage()}
             ].map(data => {
                 return {
                         name: data.name,
@@ -235,21 +238,20 @@
         const geschwindigkeitenFuerAbschnitt = async (feature) => {
             // hole Daten basierend auf Koordinaten für aktuellen Abschnitt
             const features = await dataProvider.getFeaturesFuerKoordinaten(feature.geometry.coordinates);
-            const featureFrom2022 = features[0].data;
-            const featureFrom2023 = features[1].data;
-            const featureFromLetzteWoche = features[2].data;
 
-            const v2022 = featureFrom2022?.properties.geschwindigkeit ?? "-";
-            const v2023 = featureFrom2023?.properties.geschwindigkeit ?? "-";
-            const vLetzteWoche = featureFromLetzteWoche?.properties.geschwindigkeit ?? "-";
+            const eintraege = features.map(f => {
+                const geschwindigkeit = f?.data?.properties.geschwindigkeit ?? "-";
+                const anzahl = f?.data?.properties.anzahl ?? "-";
 
-            return `Gemessene Durchschnittsgeschwindigkeiten für diesen Abschnitt in km/h:<br />
-            <b>2022:</b> ${v2022} 
-                (basierend auf ${featureFrom2022?.properties.anzahl ?? "-"} Fahrten)<br />
-            <b>2023 bisher:</b> ${v2023}
-                (basierend auf ${featureFrom2023?.properties.anzahl ?? "-"} Fahrten)<br />
-            <b>Letzte Woche:</b> ${vLetzteWoche}
-                (basierend auf ${featureFromLetzteWoche?.properties.anzahl ?? "-"} Fahrten)`;
+                return `
+                    <b>${f.name}</b> ${geschwindigkeit} (basierend auf ${anzahl} Fahrten)
+                `;
+            });
+
+            return `
+                Gemessene Durchschnittsgeschwindigkeiten für diesen Abschnitt in km/h:<br />
+                ${eintraege.join('<br />')}
+            `;
         };
 
         const initPopup = (feature) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
