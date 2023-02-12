@@ -93,7 +93,8 @@
         `;
 
     var map = L.map('map', {
-        renderer: L.canvas()
+        renderer: L.canvas(),
+        maxBounds: L.latLngBounds(L.latLng(53.4, 9.6), L.latLng(53.7, 10.4))
     }).setView([53.54, 10], 13);
     L.tileLayer(tileUrl, {
         attribution: attribution,
@@ -197,7 +198,7 @@
             return (event) => event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
         };
 
-        const renderGeoDaten = (geoData, outlineAbAnzahl) => {
+        const renderGeoDatenNachAnzahlUndGeschwindigkeit = (geoData, outlineAbAnzahl) => {
             const maxAnzahl = getMaxAnzahl(geoData.features);
 
             const outlineOptions = {style: (feature) => ({
@@ -222,9 +223,9 @@
             })}
         };
 
-        const dbrad2023 = renderGeoDaten(data2023, 45);
-        const dbrad2022 = renderGeoDaten(filterGeoJsonNachAnzahl(data2022, 70), 2000);
-        const dbrad_letzte_woche = renderGeoDaten(data_letzte_woche, 20);
+        const dbrad2023 = renderGeoDatenNachAnzahlUndGeschwindigkeit(data2023, 45);
+        const dbrad2022 = renderGeoDatenNachAnzahlUndGeschwindigkeit(filterGeoJsonNachAnzahl(data2022, 70), 2000);
+        const dbrad_letzte_woche = renderGeoDatenNachAnzahlUndGeschwindigkeit(filterGeoJsonNachAnzahl(data_letzte_woche, 15), 20);
         
         // wird später nachgeladen
         const velogruppe = L.featureGroup([]);
