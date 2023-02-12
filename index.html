@@ -100,35 +100,86 @@
         maxZoom: 18
     }).addTo(map);
 
-    // Konfigurationen der Daten und Schwellwerte
-    const config = {
-        urls: {
-           data2022: "data/dbrad_jahr_2022.json.min",
-           data2023: "data/dbrad_jahr_2023.json",
-           kw4: "data/dbrad_woche_2023-01-30.json",
-           kw5: "data/dbrad_woche_2023-02-06.json",
-           // kw6: "data/dbrad_woche_2023-02-13.json",
-           // kw7: "data/dbrad_woche_2023-02-20.json",
-           data_letzte_woche: "data/dbrad_letzte_woche.json",
-           velorouten: [
-            "data/velorouten/veloroute1.json",
-            "data/velorouten/veloroute2.json",
-            "data/velorouten/veloroute3.json",
-            "data/velorouten/veloroute4.json",
-            "data/velorouten/veloroute5.json",
-            "data/velorouten/veloroute6.json",
-            "data/velorouten/veloroute7.json",
-            "data/velorouten/veloroute8.json",
-            "data/velorouten/veloroute9.json",
-            "data/velorouten/veloroute10.json",
-            "data/velorouten/veloroute11.json",
-            "data/velorouten/veloroute12.json",
-            "data/velorouten/veloroute13.json",
-            "data/velorouten/veloroute14.json",
-            "data/velorouten/veloroute-verb.json",
-           ]
+
+    class DataProvider {
+        constructor() {
+            this.config = {
+                urls: {
+                data2022: "data/dbrad_jahr_2022.json.min",
+                data2023: "data/dbrad_jahr_2023.json",
+                kw4: "data/dbrad_woche_2023-01-30.json",
+                kw5: "data/dbrad_woche_2023-02-06.json",
+                // kw6: "data/dbrad_woche_2023-02-13.json",
+                // kw7: "data/dbrad_woche_2023-02-20.json",
+                data_letzte_woche: "data/dbrad_letzte_woche.json",
+                velorouten: [
+                    "data/velorouten/veloroute1.json",
+                    "data/velorouten/veloroute2.json",
+                    "data/velorouten/veloroute3.json",
+                    "data/velorouten/veloroute4.json",
+                    "data/velorouten/veloroute5.json",
+                    "data/velorouten/veloroute6.json",
+                    "data/velorouten/veloroute7.json",
+                    "data/velorouten/veloroute8.json",
+                    "data/velorouten/veloroute9.json",
+                    "data/velorouten/veloroute10.json",
+                    "data/velorouten/veloroute11.json",
+                    "data/velorouten/veloroute12.json",
+                    "data/velorouten/veloroute13.json",
+                    "data/velorouten/veloroute14.json",
+                    "data/velorouten/veloroute-verb.json",
+                ]
+                }
+            };
         }
-    };
+
+        #fetchJson (url) {
+            return fetch(url).then(resp => resp.json()).catch(e => console.log(`url: ${url}; error: ${e}`));
+        }
+
+        async getDataFor2022() {
+            return await this.#fetchJson(this.config.urls.data2022);
+        }
+
+        async getDataFor2023() {
+            return await this.#fetchJson(this.config.urls.data2023);
+        }
+
+
+        async getDataForLetzte7Tage() {
+            return await this.#fetchJson(this.config.urls.data_letzte_woche);
+        }
+
+        getAvailableKalenderWochen() {
+            return ["KW4", "KW5"];
+        }
+
+        async getKalenderWochen() {
+            return {
+                'KW4': await this.#fetchJson(this.config.urls.kw4),
+                'KW5': await this.#fetchJson(this.config.urls.kw5)
+            }
+        }
+
+        async getVelorouten() {
+            return await Promise.all(this.config.urls.velorouten.map(url => this.#fetchJson(url)));
+        }
+
+        #filterFeatureNachKoordinaten (koordinaten) {
+            return f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(koordinaten)
+        };
+
+        async getFeaturesFuerKoordinaten(koordinaten) {
+            return [
+                await this.getDataFor2022(),
+                await this.getDataFor2023(),
+                await this.getDataForLetzte7Tage()
+            ].map(data => data.features.filter(this.#filterFeatureNachKoordinaten)[0]);
+        }
+    }
+
+    const dataProvider = new DataProvider();
+
 
     // automatische Gewichtung der Streckenabschnitte, indem man auf die Anzahl der Fahrten pro Tag im Messzeitraum runterrechnet
     const anzahlGewichtetToWeight = (anzahl, maxAnzahl) => {
@@ -154,15 +205,9 @@
         return "black"; // there should be no records of speed >= 30
     };
 
-    const fetchJson = (url) => fetch(url).then(resp => resp.json()).catch(e => console.log(`url: ${url}; error: ${e}`));
-
     // Hervorhebung von Streckenabschnitten, indem ein zweiter Layer darunter eingeblendet wird
     const getLayerWithOutline = (geoJson, optionsOutline, optionsFill) => {
         return [L.geoJSON(geoJson, optionsOutline), L.geoJSON(geoJson, optionsFill)];
-    };
-
-    const filterFeatureNachKoordinaten = (koordinaten) => {
-        return f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(koordinaten)
     };
 
     const getMaxAnzahl = (features) => {
@@ -173,13 +218,15 @@
 
     // Hier ist der eigentliche Ablauf der Seite als asynchrone Funktion, um Oberfläche nicht zu blockieren
     const start = async () => {
-        const data_letzte_woche = await fetchJson(config.urls.data_letzte_woche);
+        const data_letzte_woche = await dataProvider.getDataForLetzte7Tage();
 
-        const geschwindigkeitenFuerAbschnitt = (feature) => {
+        const geschwindigkeitenFuerAbschnitt = async (feature) => {
             // hole Daten basierend auf Koordinaten für aktuellen Abschnitt
-            const featureFrom2022 = data2022.features.filter(filterFeatureNachKoordinaten(feature.geometry.coordinates))[0];
-            const featureFrom2023 = data2023.features.filter(filterFeatureNachKoordinaten(feature.geometry.coordinates))[0];
-            const featureFromLetzteWoche = data_letzte_woche.features.filter(filterFeatureNachKoordinaten(feature.geometry.coordinates))[0];
+            const features = await dataProvider.getFeaturesFuerKoordinaten(feature.geometry.coordinates);
+            console.log(features);
+            const featureFrom2022 = features[0];
+            const featureFrom2023 = features[1];
+            const featureFromLetzteWoche = features[2];
 
             const v2022 = featureFrom2022?.properties.geschwindigkeit ?? "-";
             const v2023 = featureFrom2023?.properties.geschwindigkeit ?? "-";
@@ -195,7 +242,7 @@
         };
 
         const initPopup = (feature) => { // Lade Content erst beim Klick, sonst werden alle Popupinhalte beim Laden der Seite erzeugt!
-            return (event) => event.popup.setContent(geschwindigkeitenFuerAbschnitt(feature));
+            return async (event) => event.popup.setContent(await geschwindigkeitenFuerAbschnitt(feature));
         };
 
         const renderGeoDatenNachAnzahlUndGeschwindigkeit = (geoData, outlineAbAnzahl) => {
@@ -234,11 +281,11 @@
         const layer_2023 = L.featureGroup([]);
 
         L.control.layers({
-            "Radverkehrsdaten 2022": layer_2022,
-            "Radverkehrsdaten 2023": layer_2023,
-            "Radverkehrsdaten KW4": layer_kw4,
-            "Radverkehrsdaten KW5": layer_kw5,
-            "Radverkehrsdaten Vergangene 7 Tage": L.featureGroup(dbrad_letzte_woche).addTo(map),
+            "Daten 2022": layer_2022,
+            "Daten 2023": layer_2023,
+            "Daten KW4": layer_kw4,
+            "Daten KW5": layer_kw5,
+            "Daten Vergangene 7 Tage": L.featureGroup(dbrad_letzte_woche).addTo(map),
         }, {
             "Velorouten": layer_velogruppe.bringToBack()
         }, {collapsed: false}).addTo(map);
@@ -246,24 +293,24 @@
         document.getElementById("loadingHint").style.display = "none";
 
         // Nachladen KW
-        const data2022 = await fetchJson(config.urls.data2022);
+        const data2022 = await dataProvider.getDataFor2022();
         const dbrad2022 = renderGeoDatenNachAnzahlUndGeschwindigkeit(filterGeoJsonNachAnzahl(data2022, 70), 2000);
         dbrad2022.forEach(l => layer_2022.addLayer(l));
 
-        const data2023 = await fetchJson(config.urls.data2023);
+        const data2023 = await dataProvider.getDataFor2023();
         const dbrad2023 = renderGeoDatenNachAnzahlUndGeschwindigkeit(data2023, 45);
         dbrad2023.forEach(l => layer_2023.addLayer(l));
 
-        const data_kw4 = await fetchJson(config.urls.kw4);
-        const data_kw5 = await fetchJson(config.urls.kw5);
-        const db_kw4 = renderGeoDatenNachAnzahlUndGeschwindigkeit(data_kw4, 20);
-        const db_kw5 = renderGeoDatenNachAnzahlUndGeschwindigkeit(data_kw5, 20);
+        const db_kw = await dataProvider.getKalenderWochen();
+        
+        const db_kw4 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW4"], 20);
+        const db_kw5 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW5"], 20);
         db_kw4.forEach(l => layer_kw4.addLayer(l));
         db_kw5.forEach(l => layer_kw5.addLayer(l));
         
 
         // Nachladen der Velorouten
-        const velorouten_data = await Promise.all(config.urls.velorouten.map(url => fetchJson(url)));
+        const velorouten_data = await dataProvider.getVelorouten();
         const velorouten = velorouten_data.map(veloroute => {
             return L.geoJSON(veloroute, {style: (feature) => ({
                 color: "blue",
