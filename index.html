@@ -131,23 +131,34 @@
                 ]
                 }
             };
+
+            this.cached = {};
         }
 
         #fetchJson (url) {
             return fetch(url).then(resp => resp.json()).catch(e => console.log(`url: ${url}; error: ${e}`));
         }
 
+        async #getFromCacheOrFetchFromUrl(key, url) {
+            if (this.cached[key]) {
+                return this.cached[key];
+            } else {
+                this.cached[key] = await this.#fetchJson(url);
+                return this.cached[key];
+            }
+        }
+
         async getDataFor2022() {
-            return await this.#fetchJson(this.config.urls.data2022);
+            return this.#getFromCacheOrFetchFromUrl('2022', this.config.urls.data2022);
         }
 
         async getDataFor2023() {
-            return await this.#fetchJson(this.config.urls.data2023);
+            return await this.#getFromCacheOrFetchFromUrl('2023', this.config.urls.data2023);
         }
 
 
         async getDataForLetzte7Tage() {
-            return await this.#fetchJson(this.config.urls.data_letzte_woche);
+            return await this.#getFromCacheOrFetchFromUrl('letztewoche', this.config.urls.data_letzte_woche);
         }
 
         getAvailableKalenderWochen() {
@@ -156,8 +167,8 @@
 
         async getKalenderWochen() {
             return {
-                'KW4': await this.#fetchJson(this.config.urls.kw4),
-                'KW5': await this.#fetchJson(this.config.urls.kw5)
+                'KW4': await this.#getFromCacheOrFetchFromUrl('KW4', this.config.urls.kw4),
+                'KW5': await this.#getFromCacheOrFetchFromUrl('KW5', this.config.urls.kw5)
             }
         }
 
@@ -165,16 +176,17 @@
             return await Promise.all(this.config.urls.velorouten.map(url => this.#fetchJson(url)));
         }
 
-        #filterFeatureNachKoordinaten (koordinaten) {
-            return f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(koordinaten)
-        };
-
         async getFeaturesFuerKoordinaten(koordinaten) {
             return [
-                await this.getDataFor2022(),
-                await this.getDataFor2023(),
-                await this.getDataForLetzte7Tage()
-            ].map(data => data.features.filter(this.#filterFeatureNachKoordinaten)[0]);
+                {name: '2022', data: await this.getDataFor2022()},
+                {name: '2022', data: await this.getDataFor2023()},
+                {name: '2022', data: await this.getDataForLetzte7Tage()}
+            ].map(data => {
+                return {
+                        name: data.name,
+                        data: data.data.features.filter(f => JSON.stringify(f.geometry.coordinates) == JSON.stringify(koordinaten))[0] 
+                     };
+            });
         }
     }
 
@@ -223,10 +235,9 @@
         const geschwindigkeitenFuerAbschnitt = async (feature) => {
             // hole Daten basierend auf Koordinaten für aktuellen Abschnitt
             const features = await dataProvider.getFeaturesFuerKoordinaten(feature.geometry.coordinates);
-            console.log(features);
-            const featureFrom2022 = features[0];
-            const featureFrom2023 = features[1];
-            const featureFromLetzteWoche = features[2];
+            const featureFrom2022 = features[0].data;
+            const featureFrom2023 = features[1].data;
+            const featureFromLetzteWoche = features[2].data;
 
             const v2022 = featureFrom2022?.properties.geschwindigkeit ?? "-";
             const v2023 = featureFrom2023?.properties.geschwindigkeit ?? "-";
