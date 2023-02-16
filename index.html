@@ -109,7 +109,7 @@
                 data2023: "data/dbrad_jahr_2023.json",
                 kw4: "data/dbrad_woche_2023-01-30.json",
                 kw5: "data/dbrad_woche_2023-02-06.json",
-                // kw6: "data/dbrad_woche_2023-02-13.json",
+                kw6: "data/dbrad_woche_2023-02-13.json",
                 // kw7: "data/dbrad_woche_2023-02-20.json",
                 data_letzte_woche: "data/dbrad_letzte_woche.json",
                 velorouten: [
@@ -162,13 +162,14 @@
         }
 
         getAvailableKalenderWochen() {
-            return ["KW4", "KW5"];
+            return ["KW4", "KW5", "KW6"];
         }
 
         async getKalenderWochen() {
             return {
                 'KW4': await this.#getFromCacheOrFetchFromUrl('KW4', this.config.urls.kw4),
-                'KW5': await this.#getFromCacheOrFetchFromUrl('KW5', this.config.urls.kw5)
+                'KW5': await this.#getFromCacheOrFetchFromUrl('KW5', this.config.urls.kw5),
+                'KW6': await this.#getFromCacheOrFetchFromUrl('KW6', this.config.urls.kw6)
             }
         }
 
@@ -183,6 +184,7 @@
                 {name: '2023 bisher', data: await this.getDataFor2023()},
                 {name: '2023 KW4', data: kw['KW4']},
                 {name: '2023 KW5', data: kw['KW5']},
+                {name: '2023 KW6', data: kw['KW6']},
                 {name: 'Letzte 7 Tage', data: await this.getDataForLetzte7Tage()}
             ].map(data => {
                 return {
@@ -195,8 +197,7 @@
 
     const dataProvider = new DataProvider();
 
-
-    // automatische Gewichtung der Streckenabschnitte, indem man auf die Anzahl der Fahrten pro Tag im Messzeitraum runterrechnet
+    // automatische Gewichtung der Streckenabschnitte relativ zum Maximalwert
     const anzahlGewichtetToWeight = (anzahl, maxAnzahl) => {
         const minAnzahl = 8;
         const normiert = (anzahl - minAnzahl) / (maxAnzahl - minAnzahl); 
@@ -290,6 +291,7 @@
         const layer_velogruppe = L.featureGroup([]);
         const layer_kw4 = L.featureGroup([]);
         const layer_kw5 = L.featureGroup([]);
+        const layer_kw6 = L.featureGroup([]);
         const layer_2022 = L.featureGroup([]);
         const layer_2023 = L.featureGroup([]);
 
@@ -298,6 +300,7 @@
             "Daten 2023": layer_2023,
             "Daten KW4": layer_kw4,
             "Daten KW5": layer_kw5,
+            "Daten KW6": layer_kw6,
             "Daten Vergangene 7 Tage": L.featureGroup(dbrad_letzte_woche).addTo(map),
         }, {
             "Velorouten": layer_velogruppe.bringToBack()
@@ -318,8 +321,10 @@
         
         const db_kw4 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW4"], 20);
         const db_kw5 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW5"], 20);
+        const db_kw6 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW6"], 20);
         db_kw4.forEach(l => layer_kw4.addLayer(l));
         db_kw5.forEach(l => layer_kw5.addLayer(l));
+        db_kw6.forEach(l => layer_kw6.addLayer(l));
         
 
         // Nachladen der Velorouten
