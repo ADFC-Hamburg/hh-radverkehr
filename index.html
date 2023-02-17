@@ -93,7 +93,7 @@
 
     var map = L.map('map', {
         renderer: L.canvas(),
-        maxBounds: L.latLngBounds(L.latLng(53.4, 9.6), L.latLng(53.7, 10.4))
+        maxBounds: L.latLngBounds(L.latLng(53.3, 9.6), L.latLng(53.7, 10.4))
     }).setView([53.54, 10], 13);
     L.tileLayer(tileUrl, {
         attribution: attribution,
@@ -273,6 +273,12 @@
                     opacity: 1
                 }), onEachFeature: (feature, layer) => {
                     layer.bindPopup("Lade.... ").on("popupopen", initPopup(feature));
+
+                    // Strecke beim Hovern hervorheben
+                    const initColor = layer.options.color;
+                    const initWeight = layer.options.weight;                    
+                    layer.on("mouseover", () => layer.setStyle({ color: 'cyan', weight: initWeight + 2}));
+                    layer.on("mouseout", () => layer.setStyle({ color: initColor, weight: initWeight }));
             }};
 
             return getLayerWithOutline(geoData, outlineOptions, fillOptions);
