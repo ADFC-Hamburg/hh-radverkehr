@@ -110,7 +110,7 @@
                 kw4: "data/dbrad_woche_2023-01-30.json",
                 kw5: "data/dbrad_woche_2023-02-06.json",
                 kw6: "data/dbrad_woche_2023-02-13.json",
-                // kw7: "data/dbrad_woche_2023-02-20.json",
+                kw7: "data/dbrad_woche_2023-02-20.json",
                 data_letzte_woche: "data/dbrad_letzte_woche.json",
                 velorouten: [
                     "data/velorouten/veloroute1.json",
@@ -169,7 +169,8 @@
             return {
                 'KW4': await this.#getFromCacheOrFetchFromUrl('KW4', this.config.urls.kw4),
                 'KW5': await this.#getFromCacheOrFetchFromUrl('KW5', this.config.urls.kw5),
-                'KW6': await this.#getFromCacheOrFetchFromUrl('KW6', this.config.urls.kw6)
+                'KW6': await this.#getFromCacheOrFetchFromUrl('KW6', this.config.urls.kw6),
+                'KW7': await this.#getFromCacheOrFetchFromUrl('KW7', this.config.urls.kw7)
             }
         }
 
@@ -185,6 +186,7 @@
                 {name: '2023 KW4', data: kw['KW4']},
                 {name: '2023 KW5', data: kw['KW5']},
                 {name: '2023 KW6', data: kw['KW6']},
+                {name: '2023 KW7', data: kw['KW7']},
                 {name: 'Letzte 7 Tage', data: await this.getDataForLetzte7Tage()}
             ].map(data => {
                 return {
@@ -298,6 +300,7 @@
         const layer_kw4 = L.featureGroup([]);
         const layer_kw5 = L.featureGroup([]);
         const layer_kw6 = L.featureGroup([]);
+        const layer_kw7 = L.featureGroup([]);
         const layer_2022 = L.featureGroup([]);
         const layer_2023 = L.featureGroup([]);
 
@@ -307,6 +310,7 @@
             "Daten KW4": layer_kw4,
             "Daten KW5": layer_kw5,
             "Daten KW6": layer_kw6,
+            "Daten KW7": layer_kw7,
             "Daten Vergangene 7 Tage": L.featureGroup(dbrad_letzte_woche).addTo(map),
         }, {
             "Velorouten": layer_velogruppe.bringToBack()
@@ -328,9 +332,11 @@
         const db_kw4 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW4"], 20);
         const db_kw5 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW5"], 20);
         const db_kw6 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW6"], 20);
+        const db_kw7 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW7"], 20);
         db_kw4.forEach(l => layer_kw4.addLayer(l));
         db_kw5.forEach(l => layer_kw5.addLayer(l));
         db_kw6.forEach(l => layer_kw6.addLayer(l));
+        db_kw7.forEach(l => layer_kw7.addLayer(l));
         
 
         // Nachladen der Velorouten
