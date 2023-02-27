@@ -101,6 +101,18 @@
     }).addTo(map);
 
 
+    const datePlusOneDay = (dateString) => {
+        const parsedDate = new Date(dateString);
+        parsedDate.setDate(parsedDate.getDate() + 1);
+        return parsedDate.toISOString().split('T')[0];
+    };
+
+    const yesterday = () => {
+        const aDate = new Date();
+        aDate.setDate(aDate.getDate() - 1);
+        return aDate.toISOString().split('T')[0];
+    };
+
     class DataProvider {
         constructor() {
             this.config = {
@@ -174,6 +186,11 @@
             }
         }
 
+        async getWocheFor(dateString) {
+            const searchForDateFileName = datePlusOneDay(dateString); // +1, weil Datensatz vom 2023-02-05 nur die Daten bis 2023-02-04 enthält
+            return await this.#getFromCacheOrFetchFromUrl(dateString, `data/dbrad_woche_${encodeURIComponent(searchForDateFileName)}.json`);
+        }
+
         async getVelorouten() {
             return await Promise.all(this.config.urls.velorouten.map(url => this.#fetchJson(url)));
         }
@@ -183,10 +200,6 @@
             return [
                 {name: '2022', data: await this.getDataFor2022()},
                 {name: '2023 bisher', data: await this.getDataFor2023()},
-                {name: '2023 KW4', data: kw['KW4']},
-                {name: '2023 KW5', data: kw['KW5']},
-                {name: '2023 KW6', data: kw['KW6']},
-                {name: '2023 KW7', data: kw['KW7']},
                 {name: 'Letzte 7 Tage', data: await this.getDataForLetzte7Tage()}
             ].map(data => {
                 return {
@@ -241,6 +254,7 @@
         const geschwindigkeitenFuerAbschnitt = async (feature) => {
             // hole Daten basierend auf Koordinaten für aktuellen Abschnitt
             const features = await dataProvider.getFeaturesFuerKoordinaten(feature.geometry.coordinates);
+            features.push({ name: `Aktuelle Ansicht (${feature.properties.von} - ${feature.properties.bis}):` , data: feature});
 
             const eintraege = features.map(f => {
                 const geschwindigkeit = f?.data?.properties.geschwindigkeit ?? "-";
@@ -274,7 +288,7 @@
                     weight: anzahlGewichtetToWeight(feature.properties.anzahl, maxAnzahl),
                     opacity: 1
                 }), onEachFeature: (feature, layer) => {
-                    layer.bindPopup("Lade.... ").on("popupopen", initPopup(feature));
+                    layer.bindPopup("Lade.... ", {maxWidth: 500}).on("popupopen", initPopup(feature));
 
                     // Strecke beim Hovern hervorheben
                     const initColor = layer.options.color;
@@ -297,24 +311,36 @@
         
         // wird später nachgeladen
         const layer_velogruppe = L.featureGroup([]);
-        const layer_kw4 = L.featureGroup([]);
-        const layer_kw5 = L.featureGroup([]);
-        const layer_kw6 = L.featureGroup([]);
-        const layer_kw7 = L.featureGroup([]);
+        const layer_woche = L.featureGroup([]);
         const layer_2022 = L.featureGroup([]);
         const layer_2023 = L.featureGroup([]);
 
         L.control.layers({
             "Daten 2022": layer_2022,
             "Daten 2023": layer_2023,
-            "Daten KW4": layer_kw4,
-            "Daten KW5": layer_kw5,
-            "Daten KW6": layer_kw6,
-            "Daten KW7": layer_kw7,
             "Daten Vergangene 7 Tage": L.featureGroup(dbrad_letzte_woche).addTo(map),
+            "Daten Woche bis (Datum unten auswählen)": layer_woche,
         }, {
             "Velorouten": layer_velogruppe.bringToBack()
         }, {collapsed: false}).addTo(map);
+
+
+        L.Control.Datepicker = L.Control.extend({
+            onAdd: function(map) {
+                var datepicker = L.DomUtil.create('input');
+                datepicker.type = 'date';
+                datepicker.min = '2023-01-28';
+                datepicker.max = yesterday();
+                datepicker.onchange = async () => {
+                    layer_woche.clearLayers();
+                    const woche = await dataProvider.getWocheFor(datepicker.value);
+                    renderGeoDatenNachAnzahlUndGeschwindigkeit(woche, 20).forEach(l => layer_woche.addLayer(l));
+                };
+                return datepicker;
+            }
+        });
+
+        new L.Control.Datepicker({ position: 'topright' }).addTo(map);
 
         document.getElementById("loadingHint").style.display = "none";
 
@@ -327,18 +353,6 @@
         const dbrad2023 = renderGeoDatenNachAnzahlUndGeschwindigkeit(data2023, 45);
         dbrad2023.forEach(l => layer_2023.addLayer(l));
 
-        const db_kw = await dataProvider.getKalenderWochen();
-        
-        const db_kw4 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW4"], 20);
-        const db_kw5 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW5"], 20);
-        const db_kw6 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW6"], 20);
-        const db_kw7 = renderGeoDatenNachAnzahlUndGeschwindigkeit(db_kw["KW7"], 20);
-        db_kw4.forEach(l => layer_kw4.addLayer(l));
-        db_kw5.forEach(l => layer_kw5.addLayer(l));
-        db_kw6.forEach(l => layer_kw6.addLayer(l));
-        db_kw7.forEach(l => layer_kw7.addLayer(l));
-        
-
         // Nachladen der Velorouten
         const velorouten_data = await dataProvider.getVelorouten();
         const velorouten = velorouten_data.map(veloroute => {
@@ -348,7 +362,7 @@
                 opacity: 0.3
             })});
         });
-        velorouten.forEach(veloroute => layer_velogruppe.addLayer(veloroute));        
+        velorouten.forEach(veloroute => layer_velogruppe.addLayer(veloroute));  
     };
 
     start();
