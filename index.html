@@ -119,6 +119,7 @@
                 urls: {
                 data2022: "data/dbrad_jahr_2022.json.min",
                 data2023: "data/dbrad_jahr_2023.json",
+                data2024: "data/dbrad_jahr_2024.json",
                 data_letzte_woche: "data/dbrad_letzte_woche.json",
                 velorouten: [
                     "data/velorouten/veloroute1.json",
@@ -162,6 +163,10 @@
 
         async getDataFor2023() {
             return await this.#getFromCacheOrFetchFromUrl('2023', this.config.urls.data2023);
+        }
+
+        async getDataFor2024() {
+            return await this.#getFromCacheOrFetchFromUrl('2024', this.config.urls.data2024);
         }
 
 
@@ -296,10 +301,12 @@
         const layer_woche = L.featureGroup([]);
         const layer_2022 = L.featureGroup([]);
         const layer_2023 = L.featureGroup([]);
+        const layer_2024 = L.featureGroup([]);
 
         L.control.layers({
             "Daten 2022": layer_2022,
             "Daten 2023": layer_2023,
+            "Daten 2024": layer_2024,
             "Daten Vergangene 7 Tage": L.featureGroup(dbrad_letzte_woche).addTo(map),
             "Daten Woche bis (Datum unten auswählen)": layer_woche,
         }, {
@@ -334,6 +341,10 @@
         const data2023 = await dataProvider.getDataFor2023();
         const dbrad2023 = renderGeoDatenNachAnzahlUndGeschwindigkeit(data2023, 45);
         dbrad2023.forEach(l => layer_2023.addLayer(l));
+
+        const data2024 = await dataProvider.getDataFor2024();
+        const dbrad2024 = renderGeoDatenNachAnzahlUndGeschwindigkeit(data2024, 45);
+        dbrad2024.forEach(l => layer_2024.addLayer(l));
 
         // Nachladen der Velorouten
         const velorouten_data = await dataProvider.getVelorouten();
