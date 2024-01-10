@@ -186,7 +186,8 @@
         async getFeaturesFuerKoordinaten(koordinaten) {
             return [
                 {name: '2022', data: await this.getDataFor2022()},
-                {name: '2023 bisher', data: await this.getDataFor2023()},
+                {name: '2023', data: await this.getDataFor2023()},
+                {name: '2024 bisher', data: await this.getDataFor2024()},
                 {name: 'Letzte 7 Tage', data: await this.getDataForLetzte7Tage()}
             ].map(data => {
                 return {
