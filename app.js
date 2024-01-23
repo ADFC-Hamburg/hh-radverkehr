@@ -140,7 +140,7 @@ const yesterday = () => {
 const showError = (message) => {
     const errorElement = document.getElementById("errorMessage");
 
-    errorElement.innerHTML = "Die Daten für die gewählte Woche sind leider nicht verfügbar";
+    errorElement.innerHTML = message;
     errorElement.style.display = "block";
     errorElement.addEventListener("click", () => {
         errorElement.style.display = "none";
