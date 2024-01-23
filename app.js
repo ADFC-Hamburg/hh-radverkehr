@@ -29,24 +29,100 @@ var map = (() => {
 var cachingJsonClient = function() {
     const cached = {};
 
-    function _fetchJson (url) {
+    const _fetchJson = (url) => {
         return fetch(url).then(resp => resp.json()).catch(e => {
             showError("Die Daten für den gewählten Zeitraum sind leider nicht verfügbar.");
             console.log(`url: ${url}; error: ${e}`);
             return {features: []};
         });
-    }
+    };
 
-    const getFromCacheOrFetchFromUrl = async function (url) {
+    const getFromCacheOrFetchFromUrl = async (url) => {
         if (cached[url]) {
             return cached[url];
         } else {
             cached[url] = await _fetchJson(url);
             return cached[url];
         }
-    }
+    };
     return { getFromCacheOrFetchFromUrl: getFromCacheOrFetchFromUrl };
 }();
+
+
+class TrafficLayer {
+    constructor(name, dataProvider, filterMinAnzahl) {
+        this.name = name;
+        this.dataProvider = dataProvider;
+        this.filterMinAnzahl = filterMinAnzahl;
+    }
+
+    async renderGeoDatenNachAnzahlUndGeschwindigkeit(outlineAbAnzahl, initPopup) {
+        const geoData = await this.dataProvider();
+
+        const getMaxAnzahl = (features) => {
+            return features.sort((feature1, feature2) => {
+                return feature2.properties.anzahl - feature1.properties.anzahl;
+            })[0].properties.anzahl;
+        };
+
+        const maxAnzahl = getMaxAnzahl(geoData.features);
+
+        // automatische Gewichtung der Streckenabschnitte relativ zum Maximalwert
+        const anzahlGewichtetToWeight = (anzahl, maxAnzahl) => {
+            const minAnzahl = 8;
+            const normiert = (anzahl - minAnzahl) / (maxAnzahl - minAnzahl); 
+            const weight = 2 + (5 * normiert); // Zahl zwischen 2 bis 7
+            return weight;
+        };
+
+        // Farbe je nach gemessener Durchschnittsgeschwindigkeit
+        const colorFromSpeed = (speed) => {
+            if (speed < 10) {
+                return "red";
+            } else if (speed < 12) {
+                return "red";
+            } else if (speed < 18) {
+                return "orange";
+            } else if (speed < 21) {
+                return "yellow";
+            } else if (speed < 30) {
+                return "green";
+            }
+            return "black"; // there should be no records of speed >= 30
+        };
+
+        // Hervorhebung von Streckenabschnitten, indem ein zweiter Layer darunter eingeblendet wird
+        const getLayerWithOutline = (geoJson, optionsOutline, optionsFill) => {
+            return [L.geoJSON(geoJson, optionsOutline), L.geoJSON(geoJson, optionsFill)];
+        };
+
+        const outlineOptions = {style: (feature) => ({
+            color: "black",
+            weight: anzahlGewichtetToWeight(feature.properties.anzahl, maxAnzahl) + 1,
+            opacity: feature.properties.anzahl > outlineAbAnzahl ? 1 : 0
+        })};
+        const fillOptions = {style: (feature) => ({
+                color: colorFromSpeed(feature.properties.geschwindigkeit),
+                weight: anzahlGewichtetToWeight(feature.properties.anzahl, maxAnzahl),
+                opacity: 1
+            }), onEachFeature: (feature, layer) => {
+                layer.bindPopup("Lade.... ", {maxWidth: 500}).on("popupopen", initPopup(feature));
+
+                // Strecke beim Hovern hervorheben
+                const initColor = layer.options.color;
+                const initWeight = layer.options.weight;                    
+                layer.on("mouseover", () => layer.setStyle({ color: 'cyan', weight: initWeight + 2}));
+                layer.on("mouseout", () => layer.setStyle({ color: initColor, weight: initWeight }));
+        }};
+
+        return getLayerWithOutline(geoData, outlineOptions, fillOptions);
+    };
+
+
+}
+
+
+
 
 
 const datePlusOneDay = (dateString) => {
@@ -101,13 +177,7 @@ class DataProvider {
             ]
             }
         };
-
-        
     }
-
-
-
-    
 
     async getDataFor2022() {
         return cachingJsonClient.getFromCacheOrFetchFromUrl(this.config.urls.data2022);
@@ -152,44 +222,18 @@ class DataProvider {
 
 const dataProvider = new DataProvider();
 
-// automatische Gewichtung der Streckenabschnitte relativ zum Maximalwert
-const anzahlGewichtetToWeight = (anzahl, maxAnzahl) => {
-    const minAnzahl = 8;
-    const normiert = (anzahl - minAnzahl) / (maxAnzahl - minAnzahl); 
-    const weight = 2 + (5 * normiert); // Zahl zwischen 2 bis 7
-    return weight;
-};
-
-// Farbe je nach gemessener Durchschnittsgeschwindigkeit
-const colorFromSpeed = (speed) => {
-    if (speed < 10) {
-        return "red";
-    } else if (speed < 12) {
-        return "red";
-    } else if (speed < 18) {
-        return "orange";
-    } else if (speed < 21) {
-        return "yellow";
-    } else if (speed < 30) {
-        return "green";
-    }
-    return "black"; // there should be no records of speed >= 30
-};
-
-// Hervorhebung von Streckenabschnitten, indem ein zweiter Layer darunter eingeblendet wird
-const getLayerWithOutline = (geoJson, optionsOutline, optionsFill) => {
-    return [L.geoJSON(geoJson, optionsOutline), L.geoJSON(geoJson, optionsFill)];
-};
-
-const getMaxAnzahl = (features) => {
-    return features.sort((feature1, feature2) => {
-        return feature2.properties.anzahl - feature1.properties.anzahl;
-    })[0].properties.anzahl;
-}
 
 // Hier ist der eigentliche Ablauf der Seite als asynchrone Funktion, um Oberfläche nicht zu blockieren
 const start = async () => {
-    const data_letzte_woche = await dataProvider.getDataForLetzte7Tage();
+    // const data_letzte_woche = await dataProvider.getDataForLetzte7Tage();
+
+
+    const filterGeoJsonNachAnzahl = (data, mindestAnzahl) => {
+        return { type: data.type, name: data.name, features: data.features.filter((feature) => {
+            return feature.properties.anzahl >= mindestAnzahl;
+        })}
+    }; 
+
 
     const geschwindigkeitenFuerAbschnitt = async (feature) => {
         // hole Daten basierend auf Koordinaten für aktuellen Abschnitt
@@ -215,39 +259,8 @@ const start = async () => {
         return async (event) => event.popup.setContent(await geschwindigkeitenFuerAbschnitt(feature));
     };
 
-    const renderGeoDatenNachAnzahlUndGeschwindigkeit = (geoData, outlineAbAnzahl) => {
-        const maxAnzahl = getMaxAnzahl(geoData.features);
-
-        const outlineOptions = {style: (feature) => ({
-            color: "black",
-            weight: anzahlGewichtetToWeight(feature.properties.anzahl, maxAnzahl) + 1,
-            opacity: feature.properties.anzahl > outlineAbAnzahl ? 1 : 0
-        })};
-        const fillOptions = {style: (feature) => ({
-                color: colorFromSpeed(feature.properties.geschwindigkeit),
-                weight: anzahlGewichtetToWeight(feature.properties.anzahl, maxAnzahl),
-                opacity: 1
-            }), onEachFeature: (feature, layer) => {
-                layer.bindPopup("Lade.... ", {maxWidth: 500}).on("popupopen", initPopup(feature));
-
-                // Strecke beim Hovern hervorheben
-                const initColor = layer.options.color;
-                const initWeight = layer.options.weight;                    
-                layer.on("mouseover", () => layer.setStyle({ color: 'cyan', weight: initWeight + 2}));
-                layer.on("mouseout", () => layer.setStyle({ color: initColor, weight: initWeight }));
-        }};
-
-        return getLayerWithOutline(geoData, outlineOptions, fillOptions);
-    };
-
-    const filterGeoJsonNachAnzahl = (data, mindestAnzahl) => {
-        return { type: data.type, name: data.name, features: data.features.filter((feature) => {
-            return feature.properties.anzahl >= mindestAnzahl;
-        })}
-    };
-
     
-    const dbrad_letzte_woche = renderGeoDatenNachAnzahlUndGeschwindigkeit(data_letzte_woche, 20);
+    const dbrad_letzte_woche = await new TrafficLayer('letzte_woche', async () => dataProvider.getDataForLetzte7Tage(), 20).renderGeoDatenNachAnzahlUndGeschwindigkeit(20, initPopup);
     
     // wird später nachgeladen
     const layer_velogruppe = L.featureGroup([]);
@@ -277,7 +290,7 @@ const start = async () => {
                 layer_woche.clearLayers();
                 const woche = await dataProvider.getWocheFor(datepicker.value);
                 if (woche.features.length > 0) {
-                    renderGeoDatenNachAnzahlUndGeschwindigkeit(woche, 20).forEach(l => layer_woche.addLayer(l));
+                    (await new TrafficLayer('gewaehlte_woche', async () => woche, 20).renderGeoDatenNachAnzahlUndGeschwindigkeit(20, initPopup)).forEach(l => layer_woche.addLayer(l));
                 }
             };
             return datepicker;
@@ -290,15 +303,15 @@ const start = async () => {
 
     // Nachladen KW
     const data2022 = await dataProvider.getDataFor2022();
-    const dbrad2022 = renderGeoDatenNachAnzahlUndGeschwindigkeit(filterGeoJsonNachAnzahl(data2022, 70), 2000);
+    const dbrad2022 = await new TrafficLayer('2022', async () => filterGeoJsonNachAnzahl(data2022, 70), 20).renderGeoDatenNachAnzahlUndGeschwindigkeit(2000, initPopup);
     dbrad2022.forEach(l => layer_2022.addLayer(l));
 
     const data2023 = await dataProvider.getDataFor2023();
-    const dbrad2023 = renderGeoDatenNachAnzahlUndGeschwindigkeit(data2023, 45);
+    const dbrad2023 = await new TrafficLayer('2023', async () => data2023, 20).renderGeoDatenNachAnzahlUndGeschwindigkeit(45, initPopup);
     dbrad2023.forEach(l => layer_2023.addLayer(l));
 
     const data2024 = await dataProvider.getDataFor2024();
-    const dbrad2024 = renderGeoDatenNachAnzahlUndGeschwindigkeit(data2024, 45);
+    const dbrad2024 = await new TrafficLayer('2024', async () => data2024, 20).renderGeoDatenNachAnzahlUndGeschwindigkeit(45, initPopup);
     dbrad2024.forEach(l => layer_2024.addLayer(l));
 
     // Nachladen der Velorouten
