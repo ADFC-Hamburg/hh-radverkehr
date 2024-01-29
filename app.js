@@ -225,7 +225,6 @@ const dataProvider = new DataProvider();
 
 // Hier ist der eigentliche Ablauf der Seite als asynchrone Funktion, um Oberfläche nicht zu blockieren
 const start = async () => {
-    // const data_letzte_woche = await dataProvider.getDataForLetzte7Tage();
 
 
     const filterGeoJsonNachAnzahl = (data, mindestAnzahl) => {
