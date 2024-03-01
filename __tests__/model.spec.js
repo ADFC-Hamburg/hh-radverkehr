@@ -1,4 +1,4 @@
-import { StreckenAbschnitt, fillStyleForFeature, outlineStyleForFeature, datePlusOneDay, filterGeoJsonNachAnzahl } from "../model";
+import { StreckenAbschnitt, fillStyleForFeature, outlineStyleForFeature, datePlusOneDay, filterGeoJsonNachAnzahl } from "../static/model";
 
 describe('StreckenAbschnitt', () => {
     test('should not have outline', () => {
