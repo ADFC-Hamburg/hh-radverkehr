@@ -1,3 +1,7 @@
+
+import { fillStyleForFeature, outlineStyleForFeature, datePlusOneDay, yesterday } from "./model.js";
+
+
 var map = (() => {
     // Karteneinstellungen
     var tileUrl = '//a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ';
@@ -65,47 +69,15 @@ class TrafficLayer {
             })[0].properties.anzahl;
         };
 
-        const maxAnzahl = getMaxAnzahl(geoData.features);
-
-        // automatische Gewichtung der Streckenabschnitte relativ zum Maximalwert
-        const anzahlGewichtetToWeight = (anzahl, maxAnzahl) => {
-            const minAnzahl = 8;
-            const normiert = (anzahl - minAnzahl) / (maxAnzahl - minAnzahl); 
-            const weight = 2 + (5 * normiert); // Zahl zwischen 2 bis 7
-            return weight;
-        };
-
-        // Farbe je nach gemessener Durchschnittsgeschwindigkeit
-        const colorFromSpeed = (speed) => {
-            if (speed < 10) {
-                return "red";
-            } else if (speed < 12) {
-                return "red";
-            } else if (speed < 18) {
-                return "orange";
-            } else if (speed < 21) {
-                return "yellow";
-            } else if (speed < 30) {
-                return "green";
-            }
-            return "black"; // there should be no records of speed >= 30
-        };
 
         // Hervorhebung von Streckenabschnitten, indem ein zweiter Layer darunter eingeblendet wird
         const getLayerWithOutline = (geoJson, optionsOutline, optionsFill) => {
             return [L.geoJSON(geoJson, optionsOutline), L.geoJSON(geoJson, optionsFill)];
         };
 
-        const outlineOptions = {style: (feature) => ({
-            color: "black",
-            weight: anzahlGewichtetToWeight(feature.properties.anzahl, maxAnzahl) + 1,
-            opacity: feature.properties.anzahl > outlineAbAnzahl ? 1 : 0
-        })};
-        const fillOptions = {style: (feature) => ({
-                color: colorFromSpeed(feature.properties.geschwindigkeit),
-                weight: anzahlGewichtetToWeight(feature.properties.anzahl, maxAnzahl),
-                opacity: 1
-            }), onEachFeature: (feature, layer) => {
+        const maxAnzahl = getMaxAnzahl(geoData.features);
+        const outlineOptions = {style: (feature) => (outlineStyleForFeature(feature, maxAnzahl, outlineAbAnzahl))};
+        const fillOptions = {style: (feature) => (fillStyleForFeature(feature, maxAnzahl)), onEachFeature: (feature, layer) => {
                 layer.bindPopup("Lade.... ", {maxWidth: 500}).on("popupopen", initPopup(feature));
 
                 // Strecke beim Hovern hervorheben
@@ -117,25 +89,9 @@ class TrafficLayer {
 
         return getLayerWithOutline(geoData, outlineOptions, fillOptions);
     };
-
-
 }
 
 
-
-
-
-const datePlusOneDay = (dateString) => {
-    const parsedDate = new Date(dateString);
-    parsedDate.setDate(parsedDate.getDate() + 1);
-    return parsedDate.toISOString().split('T')[0];
-};
-
-const yesterday = () => {
-    const aDate = new Date();
-    aDate.setDate(aDate.getDate() - 1);
-    return aDate.toISOString().split('T')[0];
-};
 
 const showError = (message) => {
     const errorElement = document.getElementById("errorMessage");
