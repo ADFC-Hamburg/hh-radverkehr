@@ -186,7 +186,7 @@ const start = async () => {
     const filterGeoJsonNachAnzahl = (data, mindestAnzahl) => {
         return { type: data.type, name: data.name, features: data.features.filter((feature) => {
             return feature.properties.anzahl >= mindestAnzahl;
-        })}
+        })};
     }; 
 
 
