@@ -270,8 +270,6 @@ const start = async () => {
         "Velorouten": layer_velogruppe.bringToBack()
     }, {collapsed: false}).addTo(map);
 
-
-
     L.Control.Datepicker = L.Control.extend({
         onAdd: function(map) {
             var datepicker = L.DomUtil.create('input');
@@ -291,12 +289,11 @@ const start = async () => {
 
     new L.Control.Datepicker({ position: 'topright' }).addTo(map);
 
-    document.getElementById("loadingHint").style.display = "none";
-
     (await defaultLayerDefinitions["Daten 2022"].renderGeoDatenNachAnzahlUndGeschwindigkeit()).forEach(l => layer_2022.addLayer(l));
     (await defaultLayerDefinitions["Daten 2023"].renderGeoDatenNachAnzahlUndGeschwindigkeit()).forEach(l => layer_2023.addLayer(l));
     (await defaultLayerDefinitions["Daten 2024"].renderGeoDatenNachAnzahlUndGeschwindigkeit()).forEach(l => layer_2024.addLayer(l));
 
+    document.getElementById("loadingHint").style.display = "none";
 
     // Nachladen der Velorouten
     const velorouten_data = await dataProvider.getVelorouten();
