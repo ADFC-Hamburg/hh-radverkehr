@@ -54,14 +54,16 @@ var cachingJsonClient = function() {
 
 
 class TrafficLayer {
-    constructor(name, dataProvider, filterMinAnzahl) {
+    constructor(name, dataProvider, filterMinAnzahl, outlineAbAnzahl, initPopup) {
         this.name = name;
         this.dataProvider = dataProvider;
         this.filterMinAnzahl = filterMinAnzahl;
         this.rendered = null;
+        this.outlineAbAnzahl = outlineAbAnzahl;
+        this.initPopup = initPopup;
     }
 
-    async renderGeoDatenNachAnzahlUndGeschwindigkeit(outlineAbAnzahl, initPopup) {
+    async renderGeoDatenNachAnzahlUndGeschwindigkeit() {
         if (this.rendered) {
             return this.rendered;
         }
@@ -90,9 +92,9 @@ class TrafficLayer {
         };
 
         const maxAnzahl = getMaxAnzahl(geoData.features);
-        const outlineOptions = {style: (feature) => (outlineStyleForFeature(feature, maxAnzahl, outlineAbAnzahl))};
+        const outlineOptions = {style: (feature) => (outlineStyleForFeature(feature, maxAnzahl, this.outlineAbAnzahl))};
         const fillOptions = {style: (feature) => (fillStyleForFeature(feature, maxAnzahl)), onEachFeature: (feature, layer) => {
-                layer.bindPopup("Lade.... ", {maxWidth: 500}).on("popupopen", initPopup(feature));
+                layer.bindPopup("Lade.... ", {maxWidth: 500}).on("popupopen", this.initPopup(feature));
 
                 // Strecke beim Hovern hervorheben
                 const initColor = layer.options.color;
@@ -229,7 +231,13 @@ const start = async () => {
     };
 
     
-    const dbrad_letzte_woche = await new TrafficLayer('letzte_woche', async () => dataProvider.getDataForLetzte7Tage(), minAnzahl).renderGeoDatenNachAnzahlUndGeschwindigkeit(20, initPopup);
+    const defaultLayerDefinitions = {
+        "Daten 2022": new TrafficLayer('2022', () => dataProvider.getDataFor2022(), minAnzahl, 45, initPopup),
+        "Daten 2023": new TrafficLayer('2023', () => dataProvider.getDataFor2023(), minAnzahl, 45, initPopup),
+        "Daten 2024": new TrafficLayer('2024', () => dataProvider.getDataFor2024(), minAnzahl, 45, initPopup),
+        "Daten Vergangene 7 Tage": new TrafficLayer('letzte_woche', () => dataProvider.getDataForLetzte7Tage(), minAnzahl, 20, initPopup)
+    };
+    
     
     // wird später nachgeladen
     const layer_velogruppe = L.featureGroup([]);
@@ -237,7 +245,10 @@ const start = async () => {
     const layer_2022 = L.featureGroup([]);
     const layer_2023 = L.featureGroup([]);
     const layer_2024 = L.featureGroup([]);
-    const layer_letzte_woche = L.featureGroup(dbrad_letzte_woche);
+    const layer_letzte_woche = L.featureGroup([]);
+
+
+    (await defaultLayerDefinitions["Daten Vergangene 7 Tage"].renderGeoDatenNachAnzahlUndGeschwindigkeit()).forEach(l => layer_letzte_woche.addLayer(l));
 
 
     const verkehrslayerGroup = {
@@ -269,7 +280,7 @@ const start = async () => {
                 layer_woche.clearLayers();
                 const woche = await dataProvider.getWocheFor(datepicker.value);
                 if (woche.features.length > 0) {
-                    (await new TrafficLayer('gewaehlte_woche', async () => woche, minAnzahl).renderGeoDatenNachAnzahlUndGeschwindigkeit(20, initPopup)).forEach(l => layer_woche.addLayer(l));
+                    (await new TrafficLayer('gewaehlte_woche', async () => woche, minAnzahl, 20, initPopup).renderGeoDatenNachAnzahlUndGeschwindigkeit()).forEach(l => layer_woche.addLayer(l));
                 }
             };
             return datepicker;
@@ -280,18 +291,10 @@ const start = async () => {
 
     document.getElementById("loadingHint").style.display = "none";
 
-    // Nachladen KW
-    const data2022 = await dataProvider.getDataFor2022();
-    const dbrad2022 = await new TrafficLayer('2022', async () => data2022, minAnzahl).renderGeoDatenNachAnzahlUndGeschwindigkeit(45, initPopup);
-    dbrad2022.forEach(l => layer_2022.addLayer(l));
+    (await defaultLayerDefinitions["Daten 2022"].renderGeoDatenNachAnzahlUndGeschwindigkeit()).forEach(l => layer_2022.addLayer(l));
+    (await defaultLayerDefinitions["Daten 2023"].renderGeoDatenNachAnzahlUndGeschwindigkeit()).forEach(l => layer_2023.addLayer(l));
+    (await defaultLayerDefinitions["Daten 2024"].renderGeoDatenNachAnzahlUndGeschwindigkeit()).forEach(l => layer_2024.addLayer(l));
 
-    const data2023 = await dataProvider.getDataFor2023();
-    const dbrad2023 = await new TrafficLayer('2023', async () => data2023, minAnzahl).renderGeoDatenNachAnzahlUndGeschwindigkeit(45, initPopup);
-    dbrad2023.forEach(l => layer_2023.addLayer(l));
-
-    const data2024 = await dataProvider.getDataFor2024();
-    const dbrad2024 = await new TrafficLayer('2024', async () => data2024, minAnzahl).renderGeoDatenNachAnzahlUndGeschwindigkeit(45, initPopup);
-    dbrad2024.forEach(l => layer_2024.addLayer(l));
 
     if (verkehrslayerGroup.hasOwnProperty(selectedLayer)) {
         verkehrslayerGroup[selectedLayer].addTo(map);
