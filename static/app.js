@@ -247,10 +247,6 @@ const start = async () => {
     const layer_2024 = L.featureGroup([]);
     const layer_letzte_woche = L.featureGroup([]);
 
-
-    (await defaultLayerDefinitions["Daten Vergangene 7 Tage"].renderGeoDatenNachAnzahlUndGeschwindigkeit()).forEach(l => layer_letzte_woche.addLayer(l));
-
-
     const verkehrslayerGroup = {
         "Daten 2022": layer_2022,
         "Daten 2023": layer_2023,
@@ -259,15 +255,21 @@ const start = async () => {
         "Daten Woche bis (Datum unten auswählen)": layer_woche,
     };
 
+    const renderLayerAndAddToMap = async (layerName) => {
+        (await defaultLayerDefinitions[layerName].renderGeoDatenNachAnzahlUndGeschwindigkeit()).forEach(l => verkehrslayerGroup[layerName].addLayer(l));
+        verkehrslayerGroup[layerName].addTo(map);
+    }
+
+    if (verkehrslayerGroup.hasOwnProperty(selectedLayer) && defaultLayerDefinitions.hasOwnProperty(selectedLayer)) {
+        renderLayerAndAddToMap(selectedLayer);
+    } else {
+        renderLayerAndAddToMap("Daten Vergangene 7 Tage");
+    }
+
     L.control.layers(verkehrslayerGroup, {
         "Velorouten": layer_velogruppe.bringToBack()
     }, {collapsed: false}).addTo(map);
 
-    if (verkehrslayerGroup.hasOwnProperty(selectedLayer)) {
-        // zeige 
-    } else {
-        layer_letzte_woche.addTo(map);
-    }
 
 
     L.Control.Datepicker = L.Control.extend({
@@ -295,10 +297,6 @@ const start = async () => {
     (await defaultLayerDefinitions["Daten 2023"].renderGeoDatenNachAnzahlUndGeschwindigkeit()).forEach(l => layer_2023.addLayer(l));
     (await defaultLayerDefinitions["Daten 2024"].renderGeoDatenNachAnzahlUndGeschwindigkeit()).forEach(l => layer_2024.addLayer(l));
 
-
-    if (verkehrslayerGroup.hasOwnProperty(selectedLayer)) {
-        verkehrslayerGroup[selectedLayer].addTo(map);
-    }
 
     // Nachladen der Velorouten
     const velorouten_data = await dataProvider.getVelorouten();
