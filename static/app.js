@@ -128,10 +128,10 @@ class DataProvider {
     constructor() {
         this.config = {
             urls: {
-            data2022: "data/dbrad_jahr_2022.json.min",
-            data2023: "data/dbrad_jahr_2023.json",
-            data2024: "data/dbrad_jahr_2024.json",
-            data_letzte_woche: "data/dbrad_letzte_woche.json",
+            data2022: "data/dbrad/dbrad_jahr_2022.json.min",
+            data2023: "data/dbrad/dbrad_jahr_2023.json",
+            data2024: "data/dbrad/dbrad_jahr_2024.json",
+            data_letzte_woche: "data/dbrad/dbrad_letzte_woche.json",
             velorouten: [
                 "data/velorouten/veloroute1.json",
                 "data/velorouten/veloroute2.json",
@@ -172,7 +172,7 @@ class DataProvider {
 
     async getWocheFor(dateString) {
         const searchForDateFileName = datePlusOneDay(dateString); // +1, weil Datensatz vom 2023-02-05 nur die Daten bis 2023-02-04 enthält
-        return await cachingJsonClient.getFromCacheOrFetchFromUrl(`data/dbrad_woche_${encodeURIComponent(searchForDateFileName)}.json`);
+        return await cachingJsonClient.getFromCacheOrFetchFromUrl(`data/dbrad/dbrad_woche_${encodeURIComponent(searchForDateFileName)}.json`);
     }
 
     async getVelorouten() {

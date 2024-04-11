@@ -19,18 +19,18 @@ jobs:
       - name: Download
         run: wget -O HH_WFS_DB_Rad_Plus.gml "https://geodienste.hamburg.de/HH_WFS_DB_Rad_Plus?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&typename=de.hh.up:aktuelles_jahr,de.hh.up:letzte_woche"
       - name: Convert 2024
-        run: ogr2ogr -f "GeoJSON" data/dbrad_jahr_2024.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml aktuelles_jahr
+        run: ogr2ogr -f "GeoJSON" data/dbrad/dbrad_jahr_2024.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml aktuelles_jahr
       - name: Convert Letzte Woche
-        run: ogr2ogr -f "GeoJSON" data/dbrad_woche_$TODAY.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml letzte_woche
+        run: ogr2ogr -f "GeoJSON" data/dbrad/dbrad_woche_$TODAY.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml letzte_woche
       - name: Create/Refresh Symlink
-        run: ln -fs dbrad_woche_$TODAY.json data/dbrad_letzte_woche.json
+        run: ln -fs dbrad_woche_$TODAY.json data/dbrad/dbrad_letzte_woche.json
       - name: Archive GeoJSON
         uses: actions/upload-artifact@v3
         with:
           name: dist-json
           path: |
-            data/*.json
+            data/dbrad/*.json
       - uses: EndBug/add-and-commit@v9
         with:
-            add: 'data/*.json'
+            add: 'data/dbrad/*.json'
             message: 'Fetched current data from Geoportal Hamburg'
