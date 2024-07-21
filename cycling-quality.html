@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Radwege-Qualität Hamburg</title>
+    <link rel="stylesheet" href="lib/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="lib/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link rel="stylesheet" href="static/app.css" />
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    <div id="map"> </div>
+
+    <div id="loadingHint">Daten werden geladen...</div>
+    <div id="errorMessage"></div>
+    <div id="explanation">
+        <section>
+            <p>Durchschnittsgeschwindigkeit in km/h</p>
+            <div id="legende">
+                <div class="v1">&lt;12</div><div class="v2">&lt;18</div><div class="v3">&lt;21</div><div class="v4">&gt;21</div>                
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="static/cycling-quality.js"></script>
+
+</body>
+</html>
