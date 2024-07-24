@@ -34,22 +34,87 @@ html, body, #map {
     font-size: 10pt;
 }
 
-#legende div {
+.legende div {
     color: #000;
     font-size: 10pt;
     font-weight: bold;
     display: inline-block;
     padding: 2px;
+    min-width: 40px;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
 }
-#legende .v1 {
+.legende .v1 {
     background-color: red;
 }
-#legende .v2 {
+.legende .v2 {
     background-color: orange;
 }
-#legende .v3 {
+.legende .v3 {
     background-color: yellow;
 }
-#legende .v4 {
+.legende .v4 {
     background-color: green;
+}
+
+.legende .stress1 {
+    background-color: darkgreen;
+}
+
+.legende .stress2 {
+    background-color: yellow;
+}
+
+.legende .stress3 {
+    background-color: orange;
+}
+
+.legende .stress4 {
+    background-color: red;
+}
+
+
+.legende .q1 {
+    background-color: rgb(122, 4, 3);
+}
+
+.legende .q2 {
+    background-color: rgb(171, 27, 4);
+}
+
+.legende .q3 {
+    background-color: rgb(213, 74, 18);
+}
+
+.legende .q4 {
+    background-color: rgb(245, 160, 56);
+}
+
+.legende .q5 {
+    background-color: rgb(243, 207, 51);
+}
+
+.legende .q6 {
+    background-color: rgb(230, 241, 34);
+}
+
+.legende .q7 {
+    background-color: rgb(167, 200, 120);
+}
+
+.legende .q8 {
+    background-color: rgb(103, 159, 206);
+}
+
+.legende .q9 {
+    background-color: rgb(68, 115, 225);
+}
+
+.legende .q10 {
+    background-color: rgb(67, 109, 218);
+}
+
+.legende .q11 {
+    background-color: rgb(65, 67, 167);
 }

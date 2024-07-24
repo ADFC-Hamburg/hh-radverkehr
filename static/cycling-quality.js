@@ -59,22 +59,39 @@ L.control.layers({
 const quality_data = await cachingJsonClient.getFromCacheOrFetchFromUrl("data/cycling_quality/cycling_quality_index.geojson");
 
 const indexToColor = (index) => {
-    if (index > 80) {
-        return "darkgreen";
+    if (index===100) {
+        return "rgb(65, 67, 167)";
     }
-    if (index > 60) {
-        return "LawnGreen";
+    if (90 <= index && index <= 99) {
+        return "rgb(67, 109, 218)";
     }
-    if (index > 50) {
-        return "yellow";
+    if (80 <= index && index <= 89) {
+        return "rgb(68, 115, 225)";
     }
-    if (index > 30) {
-        return "orange";
+    if (70 <= index && index <= 79) {
+        return "rgb(103, 159, 206)";
     }
-    if (index > 20) {
-        return "red";
-    }    
-    return "darkred";
+    if (60 <= index && index <= 69) {
+        return "rgb(167, 200, 120)";
+    }
+    if (50 <= index && index <= 59) {
+        return "rgb(230, 241, 34)";
+    }
+    if (40 <= index && index <= 49) {
+        return "rgb(243, 207, 51)";
+    }
+    if (30 <= index && index <= 39) {
+        return "rgb(245, 160, 56)"; 
+    }
+    if (20 <= index && index <= 29) {
+        return "rgb(213, 74, 18)";
+    }
+    if (10 <= index && index <= 19) {
+        return "rgb(171, 27, 4)";
+    }
+    if (0 <= index && index <= 9) {
+        return "rgb(122, 4, 3)";
+    }
 };
 
 const stressToColor = (stress) => {
