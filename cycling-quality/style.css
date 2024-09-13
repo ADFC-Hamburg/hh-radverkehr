@@ -1,0 +1,137 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+#menu {
+    background: #fff;
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    right: 10px;
+    border-radius: 3px;
+    width: 120px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    font-family: "Open Sans", sans-serif;
+}
+#menu a {
+    font-size: 13px;
+    color: #404040;
+    display: block;
+    margin: 0;
+    padding: 0;
+    padding: 10px;
+    text-decoration: none;
+    text-transform: capitalize;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+#menu a:last-child {
+    border: none;
+}
+
+#menu a:hover {
+    background-color: #f8f8f8;
+    color: #404040;
+}
+
+#menu a.active {
+    background-color: #3887be;
+    color: #ffffff;
+}
+
+#menu a.active:hover {
+    background: #3074a4;
+}
+
+#explanation {
+    max-width: 200px;
+    position: absolute;
+    right: 20px;
+    bottom: 100px;
+    background: #fff; opacity: .8;
+    padding: 10px;
+    z-index: 1000;
+    font-family: sans-serif;
+}
+#explanation p {
+    font-size: 8pt;
+}
+
+.legende div {
+    color: #000;
+    font-size: 10pt;
+    font-weight: bold;
+    display: inline-block;
+    padding: 2px;
+    min-width: 40px;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.legende .stress1 {
+    background-color: #4589fc;
+}
+
+.legende .stress2 {
+    background-color: #a7c878;
+}
+
+.legende .stress3 {
+    background-color: #ffcf23;
+}
+
+.legende .stress4 {
+    background-color: #ab1b04;
+}
+
+
+.legende .q1 {
+    background-color: #7a0403;
+}
+
+.legende .q2 {
+    background-color: #ab1b04;
+}
+
+.legende .q3 {
+    background-color: #ab1b04;
+}
+
+.legende .q4 {
+    background-color: #d54a12;
+}
+
+.legende .q5 {
+    background-color: #d54a12;
+}
+
+.legende .q6 {
+    background-color: #f3cf33;
+}
+
+.legende .q7 {
+    background-color: #e6f122;
+}
+
+.legende .q8 {
+    background-color: #a7c878;
+}
+
+.legende .q9 {
+    background-color: #679fce;
+}
+
+.legende .q10 {
+    background-color: #4473e1;
+}
+
+.legende .q11 {
+    background-color: #436dda;
+}
