@@ -32,7 +32,7 @@ const cycle_quality_layer = {
       50,
       "#e6f122",
       60,
-      "#a7c878",
+      "#4c7315",
       70,
       "#679fce",
       80,

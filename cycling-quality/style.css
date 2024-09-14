@@ -117,37 +117,37 @@ body {
 }
 
 .legende .q3 {
-    background-color: #ab1b04;
+    background-color: #d54a12;
 }
 
 .legende .q4 {
-    background-color: #d54a12;
+    background-color: #f5a038;
 }
 
 .legende .q5 {
-    background-color: #d54a12;
-}
-
-.legende .q6 {
     background-color: #f3cf33;
 }
 
-.legende .q7 {
+.legende .q6 {
     background-color: #e6f122;
 }
 
-.legende .q8 {
-    background-color: #a7c878;
+.legende .q7 {
+    background-color: #4c7315;
 }
 
-.legende .q9 {
+.legende .q8 {
     background-color: #679fce;
 }
 
-.legende .q10 {
+.legende .q9 {
     background-color: #4473e1;
 }
 
-.legende .q11 {
+.legende .q10 {
     background-color: #436dda;
+}
+
+.legende .q11 {
+    background-color: #4143a7;
 }
