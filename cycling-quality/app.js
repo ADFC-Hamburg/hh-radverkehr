@@ -299,3 +299,6 @@ map.on("idle", () => {
   }
 });
 
+document.getElementById("explanation-toggle").onclick = (e) => {
+  document.querySelector("#explanation .content").classList.toggle("hidden");
+};
