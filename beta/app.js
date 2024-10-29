@@ -187,7 +187,6 @@ map.on("idle", () => {
       for (const id of toggleableLayerIds) {
           if (id !== clickedLayer) {
             map.setLayoutProperty(id, "visibility", "none");
-            console.log("deactivate element: " + id);
             document.getElementById(id).classList.remove("active");
           }
       }
