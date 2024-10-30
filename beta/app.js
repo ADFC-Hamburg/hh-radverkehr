@@ -1,17 +1,6 @@
 let protocol = new pmtiles.Protocol();
 maplibregl.addProtocol("pmtiles", protocol.tile);
 
-let PMTILES_URL = "data/hh.pmtiles";
-const p1 = new pmtiles.PMTiles(PMTILES_URL);
-
-const PM_DBRAD_2024_PATH = "data/dbrad_2024.pmtiles"
-const p2 = new pmtiles.PMTiles(PM_DBRAD_2024_PATH);
-
-// this is so we share one instance across the JS code and the map renderer
-protocol.add(p1);
-protocol.add(p2);
-
-
 var map = new maplibregl.Map({
   container: "map",
   style: {
@@ -24,11 +13,11 @@ var map = new maplibregl.Map({
       },
       radverkehr: {
         type: "vector",
-        url: "pmtiles://" + PM_DBRAD_2024_PATH,
+        url: "pmtiles://data/dbrad_2024.pmtiles",
       },
       cycle_quality: {
         type: "vector",
-        url: "pmtiles://" + PMTILES_URL,
+        url: "pmtiles://data/hh.pmtiles",
         attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a>',
       },
       velorouten: {
@@ -171,24 +160,26 @@ map.addControl(new maplibregl.NavigationControl(), "top-left");
 
 
 map.on("idle", () => {
+  // toggle layer visibility buttons
   const toggleableLayerIds = ["radverkehr", "cycle_quality", "velorouten"];
-
 
   for (const id of toggleableLayerIds) {
     const link = document.getElementById(id);
     link.onclick = function (e) {
-      const clickedLayer = this.id;
+      const clickedLayerId = this.id;
       e.preventDefault();
       e.stopPropagation();
 
-      map.setLayoutProperty(clickedLayer, "visibility", "visible");
-      this.classList.add("active");
+      // toggle button state
+      this.classList.toggle("active"); 
 
-      for (const id of toggleableLayerIds) {
-          if (id !== clickedLayer) {
-            map.setLayoutProperty(id, "visibility", "none");
-            document.getElementById(id).classList.remove("active");
-          }
+      // toggle layer visibility
+      const visibility = map.getLayoutProperty(clickedLayerId, 'visibility');
+
+      if (visibility === 'visible') {
+          map.setLayoutProperty(clickedLayerId, 'visibility', 'none');
+      } else {
+          map.setLayoutProperty(clickedLayerId, 'visibility', 'visible');
       }
     };
     
