@@ -1,0 +1,3375 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0295970",
+        "anzahl": 36822
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": 
+          [
+            9.999377,
+            53.580126
+          ]
+        
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0295971",
+        "anzahl": 21297
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": 
+          [
+            9.999336767,
+            53.580143453
+          ]
+        
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0295972",
+        "anzahl": 15525
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": 
+          [
+            9.999405,
+            53.580105
+          ]
+        
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0295910",
+        "anzahl": 18349
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.999531,
+          53.580518
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0295911",
+        "anzahl": 9739
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.99951,
+          53.580504
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0295912",
+        "anzahl": 8610
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.999549,
+          53.580531
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7434930",
+        "anzahl": 15364
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.036556,
+          53.575722
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7434932",
+        "anzahl": 7040
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.036746,
+          53.575637
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6894920",
+        "anzahl": 1312
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.018671,
+          53.491655
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6894921",
+        "anzahl": 568
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.018558,
+          53.491671
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6894922",
+        "anzahl": 744
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.018791,
+          53.491647
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6117941",
+        "anzahl": 3293
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.042914,
+          53.598681
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0269952",
+        "anzahl": 8989
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.971398,
+          53.567133
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7302960",
+        "anzahl": 5690
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.207636,
+          53.491389
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7302961",
+        "anzahl": 2455
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.207595,
+          53.491386
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7302962",
+        "anzahl": 3235
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.207674,
+          53.491391
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7197912",
+        "anzahl": 1142
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.107673,
+          53.537659
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7414960",
+        "anzahl": 10344
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.950679,
+          53.616985
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7414961",
+        "anzahl": 5215
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.950509,
+          53.616973
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7414962",
+        "anzahl": 5129
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.950894,
+          53.617002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7433950",
+        "anzahl": 27695
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.972625,
+          53.581429
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7433951",
+        "anzahl": 13906
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.972404,
+          53.581353
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7433952",
+        "anzahl": 13789
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.972782,
+          53.581487
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6894950",
+        "anzahl": 1932
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.019164,
+          53.490731
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6894951",
+        "anzahl": 980
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.019013,
+          53.490707
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6894952",
+        "anzahl": 952
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.01929,
+          53.490747
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0375911",
+        "anzahl": 3820
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.984676,
+          53.456944
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0375942",
+        "anzahl": 2872
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.987122,
+          53.456951
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0285981",
+        "anzahl": 13369
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.966939,
+          53.557378
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7430911",
+        "anzahl": 1368
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.0146667,
+          53.492022
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6111922",
+        "anzahl": 4428
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.041315,
+          53.599698
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0117932",
+        "anzahl": 4961
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.027664,
+          53.533222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7068920",
+        "anzahl": 7619
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.186409,
+          53.489563
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7068921",
+        "anzahl": 3763
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.18623,
+          53.489586
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7068922",
+        "anzahl": 3856
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.186582,
+          53.489536
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6779940",
+        "anzahl": 6480
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.019947,
+          53.566185
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6779941",
+        "anzahl": 3920
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.019946,
+          53.566203
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6779942",
+        "anzahl": 2560
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.019949,
+          53.566168
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7297940",
+        "anzahl": 21361
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.934011,
+          53.550256
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7297941",
+        "anzahl": 10373
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.934006,
+          53.550305
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7297942",
+        "anzahl": 10988
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.934017,
+          53.550212
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0286940",
+        "anzahl": 10769
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.936786,
+          53.550202
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0286941",
+        "anzahl": 5128
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          [
+            9.93676,
+            53.550106
+          ],
+          [
+            9.936808,
+            53.550366
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0286942",
+        "anzahl": 5641
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          [
+            9.936808,
+            53.550366
+          ],
+          [
+            9.93676,
+            53.550106
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6716940",
+        "anzahl": 5936
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.044557,
+          53.563894
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6716941",
+        "anzahl": 2836
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.044549,
+          53.563911
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6716942",
+        "anzahl": 3100
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.044564,
+          53.563873
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7433911",
+        "anzahl": 10720
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.971323,
+          53.582185
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0285941",
+        "anzahl": 13339
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.96753,
+          53.55742
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0311951",
+        "anzahl": 738
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.03572,
+          53.574709
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0311911",
+        "anzahl": 4635
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.034033,
+          53.575936
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7433970",
+        "anzahl": 14497
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.970861,
+          53.581491
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7433971",
+        "anzahl": 6793
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.97083,
+          53.581518
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7433972",
+        "anzahl": 7704
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.970893,
+          53.581466
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7462910",
+        "anzahl": 1123
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.146695,
+          53.595264
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7462911",
+        "anzahl": 414
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.146682,
+          53.595249
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7462912",
+        "anzahl": 709
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.146711,
+          53.595278
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7434931",
+        "anzahl": 8324
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.036414,
+          53.5758
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6117940",
+        "anzahl": 7122
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.042867,
+          53.59874
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6117942",
+        "anzahl": 3829
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.042823,
+          53.598797
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7197931",
+        "anzahl": 501
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.108453,
+          53.537603
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0002980",
+        "anzahl": 8878
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.868894,
+          53.571251
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0002981",
+        "anzahl": 4588
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.868921,
+          53.571353
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0002982",
+        "anzahl": 4290
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.86886,
+          53.571126
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0375952",
+        "anzahl": 4888
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.985804,
+          53.456477
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0297981",
+        "anzahl": 15714
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.998361,
+          53.557705
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7432910",
+        "anzahl": 16288
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.970437,
+          53.576023
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7432911",
+        "anzahl": 8274
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.970356,
+          53.575979
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7432912",
+        "anzahl": 8014
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.970507,
+          53.576055
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7436960",
+        "anzahl": 10800
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.966497,
+          53.540829
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7436961",
+        "anzahl": 6496
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.966401,
+          53.540829
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7436962",
+        "anzahl": 4304
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.966596,
+          53.540825
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6058932",
+        "anzahl": 5194
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.890242,
+          53.601888
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6195921",
+        "anzahl": 1935
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.812332,
+          53.563549
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7432970",
+        "anzahl": 23187
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.970334,
+          53.575664
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7432971",
+        "anzahl": 11150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.970269,
+          53.575697
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7432972",
+        "anzahl": 12037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.970403,
+          53.57564
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0375950",
+        "anzahl": 10028
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.985719,
+          53.456448
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0375951",
+        "anzahl": 5140
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.985608,
+          53.456414
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6408960",
+        "anzahl": 25314
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.989954,
+          53.559573
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6408961",
+        "anzahl": 12784
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.989791,
+          53.559602
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6408962",
+        "anzahl": 12530
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.990116,
+          53.559537
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6655960",
+        "anzahl": 7437
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.042419,
+          53.597822
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6655961",
+        "anzahl": 3715
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.042238,
+          53.597788
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6655962",
+        "anzahl": 3722
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.04264,
+          53.59785
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0297980",
+        "anzahl": 30880
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.998287,
+          53.557624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0297982",
+        "anzahl": 15166
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.998243,
+          53.557556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0109931",
+        "anzahl": 8794
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.065335,
+          53.571629
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7435920",
+        "anzahl": 4269
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.09405,
+          53.656706
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7435921",
+        "anzahl": 2139
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.094014,
+          53.656712
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7435922",
+        "anzahl": 2130
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.094086,
+          53.6567
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6058930",
+        "anzahl": 8280
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.890147,
+          53.601924
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6058931",
+        "anzahl": 3086
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.890038,
+          53.601961
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6195920",
+        "anzahl": 3459
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.812432,
+          53.563549
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6195922",
+        "anzahl": 1524
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.812557,
+          53.563551
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7462971",
+        "anzahl": 1441
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.146594,
+          53.594911
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6125982",
+        "anzahl": 3675
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.040634,
+          53.59835
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0375940",
+        "anzahl": 6231
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.987104,
+          53.457004
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0375941",
+        "anzahl": 3359
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.987083,
+          53.457055
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7431960",
+        "anzahl": 26414
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.995765,
+          53.559375
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7431961",
+        "anzahl": 14949
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.995676,
+          53.559399
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7431962",
+        "anzahl": 11465
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.995849,
+          53.559356
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6370940",
+        "anzahl": 20978
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.953765,
+          53.575705
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6370941",
+        "anzahl": 10287
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.95378679,
+          53.5757405
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6370942",
+        "anzahl": 10691
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.95374997,
+          53.5756692
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6085970",
+        "anzahl": 4065
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.119304,
+          53.605705
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6085971",
+        "anzahl": 1810
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.119121,
+          53.605759
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6085972",
+        "anzahl": 2255
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.119518,
+          53.60565
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0259920",
+        "anzahl": 24302
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.976414,
+          53.563027
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0259921",
+        "anzahl": 11294
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.976263,
+          53.563029
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0393932",
+        "anzahl": 1156
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.206903,
+          53.49479
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0311970",
+        "anzahl": 25548
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.034262,
+          53.574344
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0311971",
+        "anzahl": 14164
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.034157,
+          53.574408
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0311972",
+        "anzahl": 11384
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.034366,
+          53.57428
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0311910",
+        "anzahl": 10071
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.03424,
+          53.575917
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0259922",
+        "anzahl": 13008
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.976565,
+          53.563026
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0211950",
+        "anzahl": 5568
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.931928,
+          53.628677
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0211952",
+        "anzahl": 2589
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.932035,
+          53.62874
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0285940",
+        "anzahl": 27093
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.967573,
+          53.557355
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0285942",
+        "anzahl": 13754
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.967571,
+          53.557265
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0269950",
+        "anzahl": 16517
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.971087,
+          53.567098
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0269951",
+        "anzahl": 7528
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.97098,
+          53.567036
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0311950",
+        "anzahl": 5378
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.036306,
+          53.574587
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0311952",
+        "anzahl": 4640
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.036414,
+          53.574649
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0211951",
+        "anzahl": 2979
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          [
+            9.931627,
+            53.628733
+          ],
+          [
+            9.931821,
+            53.628615
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0311912",
+        "anzahl": 5436
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.034347,
+          53.575979
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0322920",
+        "anzahl": 15860
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.010338,
+          53.577028
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0322921",
+        "anzahl": 8379
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.010242,
+          53.577008
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0322922",
+        "anzahl": 7481
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.010428,
+          53.577045
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7435962",
+        "anzahl": 4042
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.093586,
+          53.655758
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6283961",
+        "anzahl": 11854
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.993342,
+          53.558194
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7435941",
+        "anzahl": 2696
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.09482,
+          53.656418
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7462970",
+        "anzahl": 3197
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.146629,
+          53.594891
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7462972",
+        "anzahl": 1756
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.146667,
+          53.594874
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0287980",
+        "anzahl": 29506
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.935064,
+          53.555708
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0287981",
+        "anzahl": 15917
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.935066,
+          53.555798
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0287982",
+        "anzahl": 13589
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.935062,
+          53.555618
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0333961",
+        "anzahl": 444
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.02203,
+          53.533072
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0375910",
+        "anzahl": 7698
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.98469,
+          53.457078
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0375912",
+        "anzahl": 3878
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.984797,
+          53.45714
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7241940",
+        "anzahl": 6116
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.018554503,
+          53.649398252
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7241941",
+        "anzahl": 3141
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.018583105,
+          53.649513513
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7241942",
+        "anzahl": 2975
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.018531704,
+          53.649269477
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7241920",
+        "anzahl": 2467
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.017875478,
+          53.650172876
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7241921",
+        "anzahl": 1436
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.017687108,
+          53.650179099
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7241922",
+        "anzahl": 1031
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.018020975,
+          53.650166381
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7241980",
+        "anzahl": 5484
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.016967076,
+          53.649399764
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7241981",
+        "anzahl": 2156
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.016982263,
+          53.64954319
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7241982",
+        "anzahl": 3328
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.016968417,
+          53.64926781
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7241960",
+        "anzahl": 4090
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.017849418,
+          53.648746464
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7241961",
+        "anzahl": 2042
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.017801152,
+          53.648747837
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7241962",
+        "anzahl": 2048
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.017901115,
+          53.648748353
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6111920",
+        "anzahl": 7803
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.041213,
+          53.59969
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6111921",
+        "anzahl": 3375
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.041114,
+          53.599685
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0117930",
+        "anzahl": 7963
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.027366,
+          53.533288
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0117931",
+        "anzahl": 3002
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.027064,
+          53.533362
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7433910",
+        "anzahl": 21605
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.971509,
+          53.582254
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7433912",
+        "anzahl": 10885
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.971746,
+          53.58233
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6125980",
+        "anzahl": 7908
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.04061,
+          53.598375
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6125981",
+        "anzahl": 4233
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.040585,
+          53.598402
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7430910",
+        "anzahl": 2717
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.014741,
+          53.492071
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7430912",
+        "anzahl": 1349
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.014822,
+          53.492125
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0003920",
+        "anzahl": 6592
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.978983,
+          53.461673
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0003921",
+        "anzahl": 3263
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.978832,
+          53.461673
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0003922",
+        "anzahl": 3329
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.979133,
+          53.461673
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7435960",
+        "anzahl": 8079
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.093378,
+          53.655784
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7435961",
+        "anzahl": 4037
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.093107,
+          53.655824
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7435940",
+        "anzahl": 5521
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.094785,
+          53.656299
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7435942",
+        "anzahl": 2825
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.094757,
+          53.656175
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0109930",
+        "anzahl": 16757
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.064983,
+          53.571422
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0109932",
+        "anzahl": 7963
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.065085,
+          53.571287
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6304980",
+        "anzahl": 22144
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.949558,
+          53.555792
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6304981",
+        "anzahl": 11516
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.94956,
+          53.555882
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6304982",
+        "anzahl": 10628
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.949556,
+          53.555702
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0008920",
+        "anzahl": 8241
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.993816,
+          53.471196
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0008921",
+        "anzahl": 4205
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.993665,
+          53.471197
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0008922",
+        "anzahl": 4036
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.993966,
+          53.471195
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7790910",
+        "anzahl": 7329
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.987019,
+          53.564549
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7790911",
+        "anzahl": 3392
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.986912,
+          53.564487
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7790912",
+        "anzahl": 3937
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.987126,
+          53.564611
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7789960",
+        "anzahl": 4394
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.941958,
+          53.598306
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7789961",
+        "anzahl": 2320
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.941807,
+          53.598308
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7789962",
+        "anzahl": 2074
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.942109,
+          53.598305
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7788920",
+        "anzahl": 8682
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.958431,
+          53.598364
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7788921",
+        "anzahl": 4429
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.95828,
+          53.598366
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7788922",
+        "anzahl": 4253
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.958582,
+          53.598363
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7792910",
+        "anzahl": 7280
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.932041,
+          53.583687
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7792911",
+        "anzahl": 3630
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.931934,
+          53.583625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7792912",
+        "anzahl": 3650
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.932148,
+          53.583749
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6848980",
+        "anzahl": 3624
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.986063,
+          53.466262
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6848981",
+        "anzahl": 2192
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.986065,
+          53.466352
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6848982",
+        "anzahl": 1432
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.986061,
+          53.466172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6320982",
+        "anzahl": 7195
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.966662,
+          53.549839
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7787960",
+        "anzahl": 5743
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.950874,
+          53.631261
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7787961",
+        "anzahl": 2951
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.950722,
+          53.631262
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7787962",
+        "anzahl": 2792
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.951025,
+          53.63126
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7791912",
+        "anzahl": 4711
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.939719,
+          53.579807
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0007910",
+        "anzahl": 6899
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.999587,
+          53.499436
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0007911",
+        "anzahl": 3545
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.99948,
+          53.499374
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0007912",
+        "anzahl": 3354
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.999694,
+          53.499498
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7197910",
+        "anzahl": 2384
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.107601,
+          53.537571
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7197911",
+        "anzahl": 1242
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.107473,
+          53.537468
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0337950",
+        "anzahl": 2703
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.067991,
+          53.528976
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0337951",
+        "anzahl": 1553
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.067884,
+          53.528914
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0337952",
+        "anzahl": 1150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.068098,
+          53.529038
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7785931",
+        "anzahl": 3195
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.013924,
+          53.554382
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6381912",
+        "anzahl": 3877
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.932641,
+          53.597202
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6414972",
+        "anzahl": 8170
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.99553,
+          53.583616
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0219960",
+        "anzahl": 9680
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.965249,
+          53.598507
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0219961",
+        "anzahl": 4684
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.965098,
+          53.598509
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0219962",
+        "anzahl": 4996
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.9654,
+          53.598506
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7438910",
+        "anzahl": 8716
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.973575,
+          53.569558
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7438912",
+        "anzahl": 4501
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.973682,
+          53.569621
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7438911",
+        "anzahl": 4215
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.973468,
+          53.569496
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7197950",
+        "anzahl": 1514
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.108633,
+          53.537029
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7197951",
+        "anzahl": 999
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.108526,
+          53.536967
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7197952",
+        "anzahl": 515
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.108741,
+          53.537091
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6999940",
+        "anzahl": 24425
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.973947,
+          53.549627
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6999941",
+        "anzahl": 11133
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.973949,
+          53.549717
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6999942",
+        "anzahl": 13292
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.973945,
+          53.549537
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0005940",
+        "anzahl": 13804
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.038213,
+          53.555612
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0005941",
+        "anzahl": 6895
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.038215,
+          53.555702
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0005942",
+        "anzahl": 6909
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.038211,
+          53.555522
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0006910",
+        "anzahl": 11963
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.028907,
+          53.536654
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0006911",
+        "anzahl": 5930
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.028799,
+          53.536592
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 0006912",
+        "anzahl": 6033
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.029014,
+          53.536716
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6195981",
+        "anzahl": 952
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.811771,
+          53.563341
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6195960",
+        "anzahl": 4057
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.812213,
+          53.562772
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6195961",
+        "anzahl": 2129
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.812062,
+          53.562773
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6195962",
+        "anzahl": 1928
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.812364,
+          53.562771
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6274980",
+        "anzahl": 17150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.971859,
+          53.545437
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6274981",
+        "anzahl": 7900
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.971861,
+          53.545527
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6274982",
+        "anzahl": 9250
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.971857,
+          53.545347
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6247950",
+        "anzahl": 41070
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.990111,
+          53.561198
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6247951",
+        "anzahl": 18911
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.990004,
+          53.561136
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 6247952",
+        "anzahl": 22159
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.990219,
+          53.56126
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7433930",
+        "anzahl": 12694
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.972718,
+          53.582231
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7433931",
+        "anzahl": 6084
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.972614,
+          53.582295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Verkehrszählstelle 7433932",
+        "anzahl": 6610
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.972822,
+          53.582167
+        ]
+      }
+    }
+  ]
+}
