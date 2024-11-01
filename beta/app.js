@@ -26,7 +26,11 @@ var map = new maplibregl.Map({
       },
       zählstellen: {
         type: "geojson",
-        data: "./data/zählstellen.geojson?nocache2"
+        data: "./data/zählstellen.geojson"
+      },
+      rsw: {
+        type: "geojson",
+        data: "./data/rsw.geojson"
       }
     },
     glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
@@ -191,7 +195,21 @@ var map = new maplibregl.Map({
           "line-width": 7,
           "line-opacity": 0.5
         }
+      },
+      {
+        id: "rsw",
+        type: "line",
+        source: "rsw",
+        layout: {
+          visibility: "none",
+        },
+        paint: {
+          "line-color": "black",
+          "line-width": 7,
+          "line-opacity": 0.5
+        }
       }
+      
     ],
   },
   center: [10, 53.5], // starting position [lng, lat]
@@ -203,7 +221,7 @@ map.addControl(new maplibregl.NavigationControl(), "top-left");
 
 map.on("idle", () => {
   // toggle layer visibility buttons
-  const toggleableLayerIds = ["radverkehr", "velorouten", "zählstellen"];
+  const toggleableLayerIds = ["radverkehr", "velorouten", "zählstellen", "rsw"];
 
   for (const id of toggleableLayerIds) {
     const link = document.getElementById(id);
