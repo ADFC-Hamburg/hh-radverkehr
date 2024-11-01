@@ -95,17 +95,15 @@ var map = new maplibregl.Map({
         type: "circle",
         source: "zählstellen",
         layout: {
-          visibility: "none",
+          visibility: "visible",
         },
         paint: {
           "circle-radius": [
             "interpolate",
             ["linear"], ["zoom"],
-            // zoom is 5 (or less) -> Anzahl / 25
-            10,  ["/", ["get", "anzahl"], 1000],
-            // zoom is 10 (or greater) -> Anzahl / 30
-            12, ["/", ["get", "anzahl"], 1000],
-            16, ["/", ["get", "anzahl"], 800],
+            10, ["/",["sqrt", ["get", "anzahl"]], 10],
+            12, ["/",["sqrt", ["get", "anzahl"]], 10],
+            16, ["/",["sqrt", ["get", "anzahl"]], 8],
         ],
           "circle-color": "green",
           "circle-stroke-width": 2,
