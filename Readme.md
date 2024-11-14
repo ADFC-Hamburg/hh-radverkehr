@@ -1,9 +1,9 @@
-Radverkehrskarte
+Radverkehrskarten
 ====
 
 für den internen Gebrauch des ADFC Hamburg.
 
-Visualisierung der Radverkehrsdaten
+Visualisierung der Radverkehrsdaten (DB Rad+)
 ----
 
 https://radverkehr.hamburg.adfc.de/
@@ -11,7 +11,7 @@ https://radverkehr.hamburg.adfc.de/
 Visualisierung anhand der mit der DB Rad+ App erhobenen Verkehrsmengen und Durchschnittsgeschwindigkeiten (Datenquelle: [Behörde für Verkehr und Mobilitätswende (BVM)](https://metaver.de/trefferanzeige?docuuid=0CFF2923-AAEC-42FE-8DE8-A2C56A3EA1CF), [Lizenz: dl-de/by-2-0](https://www.govdata.de/dl-de/by-2-0)).
 
 
-Test: alternative Darstellung:
+Test: alternative Darstellung  (DB Rad+)
 ----
 
 https://radverkehr.hamburg.adfc.de/beta
