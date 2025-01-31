@@ -25,7 +25,7 @@ jobs:
       - name: Create/Refresh Symlink
         run: ln -fs dbrad_woche_$TODAY.json data/dbrad/dbrad_letzte_woche.json
       - name: Archive GeoJSON
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist-json
           path: |
