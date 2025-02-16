@@ -18,8 +18,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Download
         run: wget -O HH_WFS_DB_Rad_Plus.gml "https://geodienste.hamburg.de/HH_WFS_DB_Rad_Plus?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&typename=de.hh.up:aktuelles_jahr,de.hh.up:letzte_woche"
-      - name: Convert 2024
-        run: ogr2ogr -f "GeoJSON" data/dbrad/dbrad_jahr_2024.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml aktuelles_jahr
+      - name: Convert 2025
+        run: ogr2ogr -f "GeoJSON" data/dbrad/dbrad_jahr_2025.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml aktuelles_jahr
       - name: Convert Letzte Woche
         run: ogr2ogr -f "GeoJSON" data/dbrad/dbrad_woche_$TODAY.json  -s_srs EPSG:25832 -t_srs WGS84 -skipfailures HH_WFS_DB_Rad_Plus.gml letzte_woche
       - name: Create/Refresh Symlink
