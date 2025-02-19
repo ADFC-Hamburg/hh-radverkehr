@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Radexpress</title>
+    <link rel="icon" href="data:,">
+
+    <link rel="stylesheet" href="lib/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="lib/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<style>
+    article {
+        width: 100%;
+        max-width: 1200px;
+    }
+    #map {
+        width: 100%;
+        /* max-width: 1200px; */
+        height: 500px;
+    }
+    ul li::marker {
+        content: '✓';
+        font-size: 2em;
+        color: green;
+    }
+</style>
+
+</head>
+<body>
+<article>
+    <h1>Radexpress Hamburg</h1>
+    <h2>Finkenwerder - Wilhelmsburg - Moorfleet - Billstedt</h2>
+    <p>Momentan besitzen die Stadtteile Finkenwerder, Wilhelmsburg und Billstedt des Bezirks Hamburg Mitte 
+        über keine leistungsfähige Direktverbindung per ÖPNV. Radverkehr ist nur über große Umwege möglich.
+    </p><p>
+        In diesen Stadtteilen leben und arbeiten insgesamt weit über 100.000 Menschen, 
+        von denen dadurch viele auf ein Auto angewiesen sind. Durch neue Quartiere werden es in den kommenden Jahren noch mehr.
+    </p><p>
+        Abhilfe könnte ein Expressbus mit Fahrradmitnahme schaffen. 
+        Mehr dazu: <a href="https://inselrundblick.de/aktuell/mit-dem-rad-expressbus-ueber-die-elbe/" target="_blank">Mit dem Rad-Expressbus über die Elbe</a>.
+    </p>
+
+    <div id="map"> </div>
+
+
+    <h1>Vorteile des Rad-Expressbusses</h1>
+    <img src="foto.jpg" style="width: 600px;"/>
+    <ul >
+        <li>Verbindet Stadtteile mit insgesamt rund 140.000 Einwohnern miteinander, die bisher keine Direktverbindung haben.</li>
+        <li>Bietet eine fahrradkompatible Lösung für Köhlbrandquerung</li>
+        <li>Bis zum Neubau der A1-Elbbrücken wichtige und alternativlose Fahrradverbindung in den Hamburger Osten</li>
+        <li>Durch die Fahrradmitnahme kann jede Haltestelle ein etwa 10 Mal so großes Einzugsgebiet 
+            vorweisen als ein herkömmlicher Bus (mit dem Rad ca 5km² innerhalb von 5min erreichbar (hellgrün), statt 0,5km² zu Fuß (dunkelgrün)).</li>
+        <li>Alternative zur störungsanfälligen S-Bahn über die Elbbrücken</li>
+        <li>Entlastet als Querverbindung den überlasteten Hauptbahnhof</li>
+        <li>Alternative zu den oft unzuverlässigen Fährverbindungen</li>
+        <li>Entlastet die Stadtteile von Autoverkehr und reduziert langfristig den Parkdruck.</li>
+        <li>Geld, das nicht fürs Auto ausgegeben werden muss, entlastet Familien und kann lokal investiert werden.</li>
+    </ul>
+</article>
+    <script>
+    var map = (() => {
+        // Karteneinstellungen
+        var tileUrl = '//a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png ';
+        var attribution = `
+            Map data &copy; <a href="https://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors,
+                <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank">CC-BY-SA</a><br/>
+            <b>ADFC Hamburg:</b>
+                <a href="https://hamburg.adfc.de/impressum/" target="_blank">Impressum</a> | <a href="https://hamburg.adfc.de/datenschutz" target="_blank">Datenschutz</a><br />
+            `;
+
+        var map = L.map('map', {
+            renderer: L.canvas(),
+            maxBounds: L.latLngBounds(L.latLng(53.3, 9.6), L.latLng(53.7, 10.4))
+        }).setView([53.52   , 10], 12);
+        L.tileLayer(tileUrl, {
+            attribution: attribution,
+            maxZoom: 18
+        }).addTo(map);
+        return map;
+    })();
+    // Wilhelmsburg
+    // 5kmh Gehen -> 400m in 5 Minuten -> 0,5 km2
+    L.circle([53.5, 10], {
+        color: 'green',
+        fillColor: 'green',
+        fillOpacity: 0.5,
+        radius: 400
+    }).addTo(map);
+    
+    // Fahrrad 15 km/h -> 1250m in 5 Minuten -> 4,9 km2
+    // 3mal so große Reichweite, 10 mal so großes Einzugsgebiet
+    L.circle([53.5, 10], {
+        color: 'lightgreen',
+        fillColor: 'lightgreen',
+        fillOpacity: 0.5,
+        radius: 1250
+    }).addTo(map);
+
+    // Moorfleet
+    L.circle([53.516, 10.096], {
+        color: 'green',
+        fillColor: 'green',
+        fillOpacity: 0.5,
+        radius: 400
+    }).addTo(map);
+
+    L.circle([53.516, 10.096 ], {
+        color: 'lightgreen',
+        fillColor: 'lightgreen',
+        fillOpacity: 0.5,
+        radius: 1250
+    }).addTo(map);
+
+    // Billstedt
+    L.circle([53.5439, 10.104], {
+        color: 'green',
+        fillColor: 'green',
+        fillOpacity: 0.5,
+        radius: 400
+    }).addTo(map);
+
+    L.circle([53.5439, 10.104], {
+        color: 'lightgreen',
+        fillColor: 'lightgreen',
+        fillOpacity: 0.5,
+        radius: 1250
+    }).addTo(map);
+
+    // Finkenwerder
+    L.circle([53.5334, 9.8733], {
+        color: 'green',
+        fillColor: 'green',
+        fillOpacity: 0.5,
+        radius: 400
+    }).addTo(map);
+
+    L.circle([53.5334, 9.8733], {
+        color: 'lightgreen',
+        fillColor: 'lightgreen',
+        fillOpacity: 0.5,
+        radius: 1250
+    }).addTo(map);
+
+    var apple = L.icon({
+        iconUrl: 'icons/apple.webp',
+        iconSize: [38, 38],
+    
+    });
+    var nature = L.icon({
+        iconUrl: 'icons/nature.svg',
+        iconSize: [38, 38],
+    });
+    var ferry = L.icon({
+        iconUrl: 'icons/ferry.svg',
+        iconSize: [38, 38],
+    });
+    var verbot = L.icon({
+        iconUrl: 'icons/254.svg',
+        iconSize: [38, 38],
+    });
+    var sbahn = L.icon({
+        iconUrl: 'icons/sbahn.svg',
+        iconSize: [30, 30],
+    });
+    var ubahn = L.icon({
+        iconUrl: 'icons/ubahn.png',
+        iconSize: [30, 30],
+    });
+
+    L.marker([53.51, 9.8733], {icon: apple, title: "Altes Land"}).addTo(map);
+    L.marker([53.48, 10.1], {icon: nature, title: "Dove Elbe"}).addTo(map);
+    L.marker([53.543, 9.87], {icon: ferry, title: "Fähre Finkewerder - Teufelsbrück"}).addTo(map);
+    L.marker([53.518, 9.94], {icon: verbot, title: "Köhlbrandbrücke, Radverkehr verboten"}).addTo(map);
+    L.marker([53.51, 10.055], {icon: verbot, title: "A1-Brücke, Radverkehr verboten"}).addTo(map);
+    L.marker([53.498, 10.005], {icon: sbahn, title: "S Wilhelmsburg (S3, S5 nach Harburg/Stade)"}).addTo(map);
+    L.marker([53.513, 10.103], {icon: sbahn, title: "S Billwerder-Moorfleet (S2 nach Bergedorf)"}).addTo(map);
+    L.marker([53.542, 10.107], {icon: ubahn, title: "U Billstedt (U2, U4, X27, X33)"}).addTo(map);
+
+
+// FW-Whb: 20min
+// WHB-MF: 11min
+// MF-BS: 8min
+
+    const loadAndDisplayRoute = async function () {
+
+        const fwWhb = await fetch("fw-whb.geojson").then(resp => resp.json());
+        const whbmf = await fetch("whb-billstedt.geojson").then(resp => resp.json());
+        const mfbs = await fetch("moorfleet-billstedt.geojson").then(resp => resp.json());
+        L.geoJSON(fwWhb, {}).addTo(map);
+        L.geoJSON(whbmf, {}).addTo(map);
+        L.geoJSON(mfbs, {}).addTo(map);
+    }
+
+    loadAndDisplayRoute();
+
+
+
+    L.tooltip({permanent: true})
+    .setLatLng([53.55, 10.02])
+    .setContent('<p>Hauptbahnhof entlasten<br />Umstiege vermeiden</p>')
+    .openOn(map);
+
+    L.tooltip({permanent: true})
+    .setLatLng([53.53, 9.9])
+    .setContent(`<p>Finkenwerder - Wilhelmsburg:<br/>
+         Mit Öffis derzeit (ohne Fahrradmitnahme): 50-60 min.<br/ >
+         Mit dem Rad-Express: 20min</p>`)
+    .openOn(map);
+
+    L.tooltip({permanent: true, direction: "bottom"})
+    .setLatLng([53.505, 10.08])
+    .setContent(`<p>Wilhelmsburg - Moorfleet: <br /> 
+        Mit Öffis derzeit (eingeschränkte Fahrradmitnahme): ca 30 min.<br/ >
+        Mit dem Rad-Express: 11min</p>`)
+    .openOn(map);
+
+    L.tooltip({permanent: true, direction: 'right'})
+    .setLatLng([53.53, 10.11])
+    .setContent('<p>Moorfleet - Billstedt: 8min</p>')
+    .openOn(map);
+
+    // L.tooltip({permanent: true})
+    // .setLatLng([53.53, 10.17])
+    // .setContent('<p>Moorfleet - Billstedt: 8+min</p>')
+    // .openOn(map);
+
+    L.tooltip({permanent: true, direction: 'right'})
+    .setLatLng([53.55, 10.12])
+    .setContent('<p><b>Anschluss:</b> Velorouten 8, 14</p>')
+    .openOn(map);
+
+    L.tooltip({permanent: true, direction: 'right'})
+    .setLatLng([53.508, 10.11])
+    .setContent('<p><b>Anschluss:</b> Veloroute 9</p>')
+    .openOn(map);
+
+    L.tooltip({permanent: true, direction: 'bottom'})
+    .setLatLng([53.49, 10.01 ])
+    .setContent('<p><b>Anschluss:</b> Velorouten 10, 11, Radschnellweg nach Lüneburg</p>')
+    .openOn(map);
+    
+    // L.tooltip({permanent: true})
+    // .setLatLng([53.555, 9.85 ])
+    // .setContent('<p>Anschluss Fähre nach Teufelsbrück,<br />Radschnellweg nach Stade</p>')
+    // .openOn(map);
+
+
+    </script>
+
+</body>
+</html>
