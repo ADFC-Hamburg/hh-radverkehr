@@ -47,12 +47,13 @@
     <img src="foto.jpg" style="width: 600px;"/>
     <ul >
         <li>Verbindet Stadtteile mit insgesamt rund 140.000 Einwohnern miteinander, die bisher keine Direktverbindung haben.</li>
+        <li>Reduziert bisherige Fahrtzeiten zwischen den Stadtteilen um bis zu 30 Minuten.</li>
         <li>Bietet eine fahrradkompatible Lösung für Köhlbrandquerung</li>
         <li>Bis zum Neubau der A1-Elbbrücken wichtige und alternativlose Fahrradverbindung in den Hamburger Osten</li>
         <li>Durch die Fahrradmitnahme kann jede Haltestelle ein etwa 10 Mal so großes Einzugsgebiet 
             vorweisen als ein herkömmlicher Bus (mit dem Rad ca 5km² innerhalb von 5min erreichbar (hellgrün), statt 0,5km² zu Fuß (dunkelgrün)).</li>
         <li>Alternative zur störungsanfälligen S-Bahn über die Elbbrücken</li>
-        <li>Entlastet als Querverbindung den überlasteten Hauptbahnhof</li>
+        <li>Vermeidet unnötige Umstiege am überlasteten Hauptbahnhof</li>
         <li>Alternative zu den oft unzuverlässigen Fährverbindungen</li>
         <li>Entlastet die Stadtteile von Autoverkehr und reduziert langfristig den Parkdruck.</li>
         <li>Geld, das nicht fürs Auto ausgegeben werden muss, entlastet Familien und kann lokal investiert werden.</li>
@@ -72,7 +73,7 @@
         var map = L.map('map', {
             renderer: L.canvas(),
             maxBounds: L.latLngBounds(L.latLng(53.3, 9.6), L.latLng(53.7, 10.4))
-        }).setView([53.52   , 10], 12);
+        }).setView([53.52   , 10], 11);
         L.tileLayer(tileUrl, {
             attribution: attribution,
             maxZoom: 18
@@ -171,8 +172,8 @@
     L.marker([53.51, 9.8733], {icon: apple, title: "Altes Land"}).addTo(map);
     L.marker([53.48, 10.1], {icon: nature, title: "Dove Elbe"}).addTo(map);
     L.marker([53.543, 9.87], {icon: ferry, title: "Fähre Finkewerder - Teufelsbrück"}).addTo(map);
-    L.marker([53.518, 9.94], {icon: verbot, title: "Köhlbrandbrücke, Radverkehr verboten"}).addTo(map);
-    L.marker([53.51, 10.055], {icon: verbot, title: "A1-Brücke, Radverkehr verboten"}).addTo(map);
+    // L.marker([53.518, 9.94], {icon: verbot, title: "Köhlbrandbrücke, Radverkehr verboten"}).addTo(map);
+    // L.marker([53.51, 10.055], {icon: verbot, title: "A1-Brücke, Radverkehr verboten"}).addTo(map);
     L.marker([53.498, 10.005], {icon: sbahn, title: "S Wilhelmsburg (S3, S5 nach Harburg/Stade)"}).addTo(map);
     L.marker([53.513, 10.103], {icon: sbahn, title: "S Billwerder-Moorfleet (S2 nach Bergedorf)"}).addTo(map);
     L.marker([53.542, 10.107], {icon: ubahn, title: "U Billstedt (U2, U4, X27, X33)"}).addTo(map);
@@ -194,37 +195,6 @@
 
     loadAndDisplayRoute();
 
-
-
-    L.tooltip({permanent: true})
-    .setLatLng([53.55, 10.02])
-    .setContent('<p>Hauptbahnhof entlasten<br />Umstiege vermeiden</p>')
-    .openOn(map);
-
-    L.tooltip({permanent: true})
-    .setLatLng([53.53, 9.9])
-    .setContent(`<p>Finkenwerder - Wilhelmsburg:<br/>
-         Mit Öffis derzeit (ohne Fahrradmitnahme): 50-60 min.<br/ >
-         Mit dem Rad-Express: 20min</p>`)
-    .openOn(map);
-
-    L.tooltip({permanent: true, direction: "bottom"})
-    .setLatLng([53.505, 10.08])
-    .setContent(`<p>Wilhelmsburg - Moorfleet: <br /> 
-        Mit Öffis derzeit (eingeschränkte Fahrradmitnahme): ca 30 min.<br/ >
-        Mit dem Rad-Express: 11min</p>`)
-    .openOn(map);
-
-    L.tooltip({permanent: true, direction: 'right'})
-    .setLatLng([53.53, 10.11])
-    .setContent('<p>Moorfleet - Billstedt: 8min</p>')
-    .openOn(map);
-
-    // L.tooltip({permanent: true})
-    // .setLatLng([53.53, 10.17])
-    // .setContent('<p>Moorfleet - Billstedt: 8+min</p>')
-    // .openOn(map);
-
     L.tooltip({permanent: true, direction: 'right'})
     .setLatLng([53.55, 10.12])
     .setContent('<p><b>Anschluss:</b> Velorouten 8, 14</p>')
@@ -232,19 +202,18 @@
 
     L.tooltip({permanent: true, direction: 'right'})
     .setLatLng([53.508, 10.11])
-    .setContent('<p><b>Anschluss:</b> Veloroute 9</p>')
+    .setContent('<p><b>Anschluss:</b> Veloroute 9<br /> Radschnellweg nach Geesthacht</p>')
     .openOn(map);
 
     L.tooltip({permanent: true, direction: 'bottom'})
     .setLatLng([53.49, 10.01 ])
-    .setContent('<p><b>Anschluss:</b> Velorouten 10, 11, Radschnellweg nach Lüneburg</p>')
+    .setContent('<p><b>Anschluss:</b> Velorouten 10, 11<br /> Radschnellweg nach Lüneburg und Tostedt</p>')
     .openOn(map);
-    
-    // L.tooltip({permanent: true})
-    // .setLatLng([53.555, 9.85 ])
-    // .setContent('<p>Anschluss Fähre nach Teufelsbrück,<br />Radschnellweg nach Stade</p>')
-    // .openOn(map);
 
+    L.tooltip({permanent: true, direction: 'left'})
+    .setLatLng([53.52, 9.87])
+    .setContent('<p><b>Anschluss:</b> Radschnellweg nach Stade</p>')
+    .openOn(map);
 
     </script>
 
